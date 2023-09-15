@@ -6,10 +6,16 @@ all:
 	javac *.java
 
 start:
-	java AggregationServer
+	java AggregationServer 
 
-client:
-	java CalculatorClient
+client1:
+	java GETClient "http://127.0.0.1:7050" "Alice"
+
+client2:
+	java GETClient "http://127.0.0.1:7050" "Bob"
+
+client3:
+	java GETClient "http://127.0.0.1:7050" "Charlie"
 
 clean:
 	rm *.class

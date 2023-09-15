@@ -9,6 +9,7 @@ public class ClientHandler implements Runnable {
     private Socket client_soc;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
+    private String username;
     
     // Constructor
     public ClientHandler(Socket socket) {
@@ -24,16 +25,23 @@ public class ClientHandler implements Runnable {
         }
     }
 
-    // This is the code that will be executed in a thread
+    // This is the code that will be executed in a thread, where the handling logic is implemented.
     @Override
     public void run() {
         String request;
+        try {
+            username = bufferedReader.readLine();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        
 
         // Keep listening fpr client requests
         while (client_soc.isConnected()) {
             try {
                 // Get request
                 request = bufferedReader.readLine();
+                System.out.println(username + ": " + request);
                 
                 // reply
                 bufferedWriter.write("you said" + request);
@@ -41,15 +49,17 @@ public class ClientHandler implements Runnable {
                 bufferedWriter.flush();
             } catch (IOException e){
                 CloseConnection();
+                break;
             }
         }
     }
 
     // This function closes the connection
     public void CloseConnection() {
+        System.out.println("Client disconnected.");
         try {
             if (bufferedReader != null) {
-            bufferedReader.close();
+                bufferedReader.close();
             }
             if (bufferedWriter != null) {
                 bufferedWriter.close();
