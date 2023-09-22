@@ -9,7 +9,6 @@ public class ClientHandler implements Runnable {
     private Socket client_soc;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
-    private String username;
     
     // Constructor
     public ClientHandler(Socket socket) {
@@ -28,29 +27,60 @@ public class ClientHandler implements Runnable {
     // This is the code that will be executed in a thread, where the handling logic is implemented.
     @Override
     public void run() {
-        String request;
-        try {
-            username = bufferedReader.readLine();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        
-
         // Keep listening fpr client requests
         while (client_soc.isConnected()) {
+            String request;
             try {
-                // Get request
+                // Read in the request
                 request = bufferedReader.readLine();
-                System.out.println(username + ": " + request);
                 
-                // reply
-                bufferedWriter.write("you said" + request);
-                bufferedWriter.newLine();
-                bufferedWriter.flush();
+                // Parse the request
+                ParseHTTPRequest(request);
             } catch (IOException e){
                 CloseConnection();
                 break;
             }
+        }
+    }
+
+    // This function parses the request and send response accordingly. It returns true if the request is valid, otherwise false.
+    public boolean ParseHTTPRequest(String request) {
+        // split the string by space
+        String[] parts = request.split(" ");
+
+        // GET /weather HTTP/1.1\n Host:
+        if (parts[0].equals("GET")) {
+            if (parts[1].equals("/weather")) {
+                // SendWeather();
+                SendMessage("Sending weather.... not yet implemented. But it looks pretty sunny today!");
+            } else {
+                // method doest exist
+                SendMessage("405 error: Method Not Allowed");
+                return false;
+            }
+        } else if (parts[0].equals("POST")) {
+            if (parts[1].equals("/update-weather")) {
+                
+            } else {
+                // method doest exist
+                SendMessage("405 error: Method Not Allowed");
+                return false;
+            }
+        } else {
+            // method doest exist
+            SendMessage("405 error: Method Not Allowed");
+            return false;
+        }
+        return true;
+    }
+
+    public void SendMessage(String msg) {
+        try {
+            this.bufferedWriter.write(msg);
+            this.bufferedWriter.newLine();
+            this.bufferedWriter.flush();
+        } catch (IOException e){
+            CloseConnection();
         }
     }
 

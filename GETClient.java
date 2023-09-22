@@ -5,13 +5,13 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.net.URL;
-import java.util.Scanner;
 
 public class GETClient {
     private Socket my_soc;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
 
+    // This function creates a client object
     public GETClient(Socket socket) {
         try {
             this.my_soc = socket;
@@ -41,6 +41,36 @@ public class GETClient {
         }
     }
 
+    // This function sends a GET request to the Aggregation server to recieve the latest weather data
+    public String GetWeather(String dest) {
+        // send a GET request to get weather data
+        String msg = "GET /weather HTTP/1.1\n Host:" + dest;
+        SendMessage(dest,msg);
+        
+        String response = "";
+        // Recieve the response
+        try {
+            response = this.bufferedReader.readLine();  
+        } catch (Exception e) {
+            System.out.println("Something went wrong. Client disconnected.");
+            this.CloseConnection();
+        }
+        return response;
+    }
+
+    public void SendMessage(String dest, String msg) {
+        if (this.my_soc.isConnected()) {
+            try {
+                this.bufferedWriter.write(msg);
+                this.bufferedWriter.newLine();
+                this.bufferedWriter.flush();
+            }  catch (Exception e) {
+                System.out.println("Something went wrong. Client disconnected.");
+                this.CloseConnection();
+            }
+        }
+    }
+
     public static void main(String args[]) throws IOException{
         // Get the server name and port from commandline
         URL url = new URL(args[0]);
@@ -52,24 +82,10 @@ public class GETClient {
         GETClient client = new GETClient(socket);
         System.out.println("Client is connected");
 
-        // Get client username
-        client.bufferedWriter.write(args[1]);
-        client.bufferedWriter.newLine();
-        client.bufferedWriter.flush();
+        String response = client.GetWeather(url.toString());
+        System.out.println(response);
 
-        // Test sending message
-        Scanner scanner = new Scanner(System.in);
-        while (client.my_soc.isConnected()) {
-            try {
-                String msg = scanner.nextLine();
-                client.bufferedWriter.write(msg);
-                client.bufferedWriter.newLine();
-                client.bufferedWriter.flush();
-            }  catch (Exception e) {
-                client.CloseConnection();
-            }
-        }
-        scanner.close();
+        
     }
 }
 
