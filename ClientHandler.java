@@ -63,12 +63,12 @@ public class ClientHandler implements Runnable {
                 
             } else {
                 // method doest exist
-                SendMessage("405 error: Method Not Allowed");
+                SendMessage("400 error: Bad Request");
                 return false;
             }
         } else {
             // method doest exist
-            SendMessage("405 error: Method Not Allowed");
+            SendMessage("400 error: Bad Request");
             return false;
         }
         return true;

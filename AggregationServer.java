@@ -45,8 +45,24 @@ public class AggregationServer {
     }
 
     public static void main(String[] args) throws IOException{
+        // Get port number from command line argument
+        int port_number = 4567;
+        if (args.length > 0) {
+            try {
+                port_number = Integer.parseInt(args[0]);
+            } catch (Exception e){
+                port_number = 4567; // the argument is an invalid port number -- default to 4567
+            }
+        }
+
         // Create a server socket
-        ServerSocket serverSocket = new ServerSocket(7050);
+        ServerSocket serverSocket = null;
+        // Use try-catch to prevent failing to start because the port is not available.
+        try {
+            serverSocket = new ServerSocket(port_number);
+        } catch(Exception e) {
+            serverSocket = new ServerSocket(4567);
+        }
 
         // Starts the server
         AggregationServer server = new AggregationServer(serverSocket);
