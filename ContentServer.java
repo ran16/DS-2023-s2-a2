@@ -6,13 +6,13 @@ import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.net.URL;
 
-public class GETClient {
+public class ContentServer {
     private Socket my_soc;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
 
     // This function creates a client object
-    public GETClient(Socket socket) {
+    public ContentServer(Socket socket) {
         try {
             this.my_soc = socket;
             // Turn the socket's byte stream into char stream, and wrap it in a buffer for both read and write.

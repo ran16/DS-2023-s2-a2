@@ -9,6 +9,7 @@ public class ClientHandler implements Runnable {
     private Socket client_soc;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
+    private Converter converter = new Converter(); // create a converter for string <-> JSON
     
     // Constructor
     public ClientHandler(Socket socket) {
@@ -27,61 +28,76 @@ public class ClientHandler implements Runnable {
     // This is the code that will be executed in a thread, where the handling logic is implemented.
     @Override
     public void run() {
-        // Keep listening fpr client requests
-        while (client_soc.isConnected()) {
-            String request;
-            try {
-                // Read in the request
-                request = bufferedReader.readLine();
-                
-                // Parse the request
-                ParseHTTPRequest(request);
-            } catch (IOException e){
-                CloseConnection();
-                break;
+        // Listen for client requests
+        try {
+            // Read in the request
+            String request = "";
+            String line = bufferedReader.readLine();
+            
+            while (line != null && !line.isEmpty()) {
+                request = request + line + "\n";
+                line = bufferedReader.readLine();
             }
+            System.out.println("quack: --------------\n"+request+"------------");
+            
+            // Parse the request
+            ParseHTTPRequest(request);
+        } catch (IOException e){
+            CloseConnection();
         }
     }
 
     // This function parses the request and send response accordingly. It returns true if the request is valid, otherwise false.
-    public boolean ParseHTTPRequest(String request) {
-        // split the string by space
-        String[] parts = request.split(" ");
+    public void ParseHTTPRequest(String request) {
+        try {
+            // split the string by space
+            String[] parts = request.split(" ");
 
-        // GET /weather HTTP/1.1\n Host:
-        if (parts[0].equals("GET")) {
-            if (parts[1].equals("/weather")) {
-                // SendWeather();
-                SendMessage("Sending weather.... not yet implemented. But it looks pretty sunny today!");
+            // Parse request: GET /weather HTTP/1.1\n Host:
+            if (parts.length>1 && parts[0].equals("GET")) {
+                String[] path_parts = parts[1].split("/");
+                if (path_parts.length > 1 && path_parts[1].equals("weather")) {
+                    if (path_parts.length > 2) {
+                        SendMessage("requested for weather from station " + path_parts[2]);
+                    } else {
+                        SendMessage("HTTP/1.1 200 OK\r\n" +
+                        "Content-Type: json\r\n" +
+                        "\r\n" + this.converter.txt2JSON("./weather.txt"));
+                        CloseConnection();
+                    }
+                } else {
+                    // method doest exist
+                    SendMessage("405 error: Method Not Allowed");
+                }
+            } else if (parts.length>1 && parts[0].equals("POST")) {
+                if (parts[1].equals("/update-weather")) {
+                    
+                } else {
+                    // method doest exist
+                    SendMessage("400 error: Bad Request");
+                }
             } else {
                 // method doest exist
-                SendMessage("405 error: Method Not Allowed");
-                return false;
-            }
-        } else if (parts[0].equals("POST")) {
-            if (parts[1].equals("/update-weather")) {
-                
-            } else {
-                // method doest exist
+                System.out.println(request);
                 SendMessage("400 error: Bad Request");
-                return false;
             }
-        } else {
-            // method doest exist
-            SendMessage("400 error: Bad Request");
-            return false;
+        } catch (Exception e) {
+            // Bad request
+            e.printStackTrace();
+            SendMessage("here 400 error: Bad Request");
         }
-        return true;
     }
 
     public void SendMessage(String msg) {
-        try {
-            this.bufferedWriter.write(msg);
-            this.bufferedWriter.newLine();
-            this.bufferedWriter.flush();
-        } catch (IOException e){
-            CloseConnection();
-        }
+        if (client_soc.isConnected()) {
+            try {
+                this.bufferedWriter.write(msg);
+                this.bufferedWriter.newLine();
+                this.bufferedWriter.flush();
+            } catch (IOException e){
+                CloseConnection();
+            }
+        }    
     }
 
     // This function closes the connection
