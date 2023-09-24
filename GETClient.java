@@ -46,7 +46,6 @@ public class GETClient {
         // send a GET request to get weather data
         String msg = "GET /weather HTTP/1.1\n Host:" + dest;
         SendMessage(dest,msg);
-        
         String response = "";
         // Recieve the response
         try {
@@ -72,20 +71,43 @@ public class GETClient {
     }
 
     public static void main(String args[]) throws IOException{
+        if (args.length < 1) {
+            System.out.println("Please provide valid url.");
+            return;
+        }
+        
         // Get the server name and port from commandline
-        URL url = new URL(args[0]);
-        String host = url.getHost();
-        int port = url.getPort();
+        URL url = null;
+        String host = "";
+        int port;
+        try {
+            url = new URL(args[0]);
+            host = url.getHost();
+            port = url.getPort();
+        } catch (Exception e){
+            System.out.println("Please provide valid url.");
+            return;
+        }
 
         // Connect
-        Socket socket = new Socket(host, port);
-        GETClient client = new GETClient(socket);
-        System.out.println("Client is connected");
+        try{
+            Socket socket = new Socket(host, port);
+            GETClient client = new GETClient(socket);
+            System.out.println("Client is connected");
 
-        String response = client.GetWeather(url.toString());
-        System.out.println(response);
+            // Get station ID if there is one
+            String stationID = "";
+            if (args.length > 1) {
+                stationID = "/"+args[1];
+            }
 
-        
+            // Send GET request
+            String response = client.GetWeather(url.toString()+stationID);
+            System.out.println(response);
+        } catch (IOException e) {
+            System.out.println("failed to connect to server. Please check the host and port");
+            return;
+        }
     }
 }
 

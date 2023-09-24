@@ -9,7 +9,7 @@ start:
 	java AggregationServer
 
 client:
-	java GETClient "http://127.0.0.1:7050"
+	java GETClient "http://127.0.0.1:4567"
 
 clean:
 	rm *.class
