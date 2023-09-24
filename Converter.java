@@ -21,11 +21,11 @@ public class Converter {
 
                 // Attach the key to the JSON string
                 String key = parts[0].trim();
-                JSON_str = JSON_str + " \"" + key + "\":\"";
+                JSON_str = JSON_str + " \"" + key + "\":";
 
                 // Attach the value to the JSON string
                 String value = parts[1].trim();
-                if (value.matches("-?\\\\d+(\\\\.\\\\d+)?")) { // if the value is a number, no need to add quotes
+                if (value.matches("-?\\d+(\\.\\d+)?")) { // if the value is a number, no need to add quotes
                     JSON_str += value;
                 } else {
                     JSON_str = JSON_str + " \"" + value +"\"";
