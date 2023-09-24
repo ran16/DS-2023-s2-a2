@@ -24,7 +24,10 @@ public class Converter {
                 JSON_str = JSON_str + " \"" + key + "\":";
 
                 // Attach the value to the JSON string
-                String value = parts[1].trim();
+                String value = parts[1];
+                for (int i=2; i<parts.length; i++) {    
+                    value = value + ":" +parts[i].trim(); // to caputre 15/04:00pm as a value
+                }
                 if (value.matches("-?\\d+(\\.\\d+)?")) { // if the value is a number, no need to add quotes
                     JSON_str += value;
                 } else {
