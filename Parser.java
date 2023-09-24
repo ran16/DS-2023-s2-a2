@@ -2,7 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-public class Converter {
+public class Parser {
 
     // This function reads a txt file and convert its content to JSON format.
     public String txt2JSON(String FilePath) {
@@ -31,7 +31,7 @@ public class Converter {
                 if (value.matches("-?\\d+(\\.\\d+)?")) { // if the value is a number, no need to add quotes
                     JSON_str += value;
                 } else {
-                    JSON_str = JSON_str + " \"" + value +"\"";
+                    JSON_str = JSON_str + "\"" + value +"\"";
                 }
             }
             JSON_str += "\n}\n";
@@ -39,5 +39,25 @@ public class Converter {
         } catch (IOException e) {
             return "";
         }
+    }
+
+    public String JSON2String(String JSON_str) {
+        String str = "";
+        String[] parts = str.split(",\n");
+
+        for (String p : parts) {
+            if (!p.equals("{") && !p.equals("}")) {
+                String sub_str = "";
+                String[] sections = p.split("\"");
+                for (int i=0; i<sections.length; i++) {
+                    if (i==sections.length-1 && sections[i].equals(",")) {
+                        break;
+                    }
+                    sub_str = sub_str+ sections[i];
+                }
+
+            }
+        }
+
     }
 }

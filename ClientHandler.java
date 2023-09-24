@@ -9,7 +9,7 @@ public class ClientHandler implements Runnable {
     private Socket client_soc;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
-    private Converter converter = new Converter(); // create a converter for string <-> JSON
+    private Parser Parser = new Parser(); // create a Parser for string <-> JSON
     
     // Constructor
     public ClientHandler(Socket socket) {
@@ -62,7 +62,7 @@ public class ClientHandler implements Runnable {
                     } else {
                         SendMessage("HTTP/1.1 200 OK\r\n" +
                         "Content-Type: json\r\n" +
-                        "\r\n" + this.converter.txt2JSON("./weather.txt"));
+                        "\r\n" + this.Parser.txt2JSON("./weather.txt"));
                         CloseConnection();
                     }
                 } else {
