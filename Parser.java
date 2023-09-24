@@ -41,23 +41,28 @@ public class Parser {
         }
     }
 
+    // This functions takes in a JSON str (simple ones without nesting brackets, and with \n at the end of each entry), and returns a plain string. 
     public String JSON2String(String JSON_str) {
         String str = "";
-        String[] parts = str.split(",\n");
+        String[] parts = JSON_str.trim().split(",\n");
 
+        // Parse line by line
         for (String p : parts) {
-            if (!p.equals("{") && !p.equals("}")) {
-                String sub_str = "";
-                String[] sections = p.split("\"");
-                for (int i=0; i<sections.length; i++) {
-                    if (i==sections.length-1 && sections[i].equals(",")) {
-                        break;
-                    }
-                    sub_str = sub_str+ sections[i];
-                }
+            // Strip quotes
+            String temp = "";
+            String[] sections = p.split("\"");
+            for (int i=0; i<sections.length; i++) {
+                temp = temp+ sections[i];
+            }
 
+            // Strip commas
+            if (temp.length() > 1 && temp.substring(temp.length()-1, temp.length()-1).equals(",")) {
+                str = str + temp.substring(0, temp.length()-2) + "\n";
+            } else {
+                str = str + temp + "\n";
             }
         }
-
+        // strip brackets
+        return str.substring(1, str.length()-2);
     }
 }

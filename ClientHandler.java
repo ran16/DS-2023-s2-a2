@@ -9,13 +9,14 @@ public class ClientHandler implements Runnable {
     private Socket client_soc;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
-    private Parser Parser = new Parser(); // create a Parser for string <-> JSON
+    private Parser Parser; // create a Parser for string <-> JSON
     
     // Constructor
     public ClientHandler(Socket socket) {
         try {
             // This is the client socket
             this.client_soc = socket;
+            this.Parser = new Parser();
 
             // Turn the socket's byte stream into char stream, and wrap it in a buffer for both read and write.
             this.bufferedReader = new BufferedReader(new InputStreamReader(client_soc.getInputStream()));

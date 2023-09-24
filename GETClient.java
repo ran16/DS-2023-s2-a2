@@ -10,11 +10,14 @@ public class GETClient {
     private Socket my_soc;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
+    private Parser Parser; // create a Parser for string <-> JSON
+    
 
     // This function creates a client object
     public GETClient(Socket socket) {
         try {
             this.my_soc = socket;
+            this.Parser = new Parser();
             // Turn the socket's byte stream into char stream, and wrap it in a buffer for both read and write.
             this.bufferedReader = new BufferedReader(new InputStreamReader(my_soc.getInputStream()));
             this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(my_soc.getOutputStream()));
@@ -45,7 +48,6 @@ public class GETClient {
     public String GetWeather(String dest, String stationID) {
         // send a GET request to get weather data
         String msg = "GET /weather" + stationID + " HTTP/1.1\nHost:" + dest+"\n";
-        System.out.println(msg);
         SendMessage(dest,msg);
 
         // Recieve the response
@@ -60,6 +62,21 @@ public class GETClient {
         } catch (Exception e) {
             return "";
         }
+    }
+
+    // This function returns the response code as an int
+    public int GetResponseCode(String response) {
+        return Integer.parseInt(response.split(" ")[1]);
+    }
+
+    // This function prints the weather from the response
+    public void PrintWeather(String response) {
+        // Find where the JSON content starts by finding the index of the first {
+        int i=0;
+        while (response.charAt(i) != '{') {
+            i++;
+        }
+        System.out.println(Parser.JSON2String(response.substring(i, response.length()-1)));
     }
 
     public void SendMessage(String dest, String msg) {
@@ -108,7 +125,7 @@ public class GETClient {
 
             // Send GET request
             String response = client.GetWeather(url.toString(), stationID);
-            System.out.println(response);
+            client.PrintWeather(response);
         } catch (IOException e) {
             System.out.println("failed to connect to server. Please check the host and port");
             return;
