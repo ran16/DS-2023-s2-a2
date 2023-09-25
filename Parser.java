@@ -4,41 +4,45 @@ import java.io.IOException;
 
 public class Parser {
 
-    // This function reads a txt file and convert its content to JSON format.
-    public String txt2JSON(String FilePath) {
-        String JSON_str = "{";
-        try (BufferedReader reader = new BufferedReader(new FileReader(FilePath))) {
-            String line;
-            while ((line = reader.readLine()) != null) {
-                // add , to the end of previous field, if it is not the first field
-                if (JSON_str.equals("{")){
-                    JSON_str += "\n";
-                } else {
-                    JSON_str += ",\n";
-                }
-                // Split line by ; to find key and value 
-                String[] parts = line.split(":");
+    // This function convert a string to JSON format.
+    public String str2JSON(String str) {
+        String[] lines = str.split("\n");
 
-                // Attach the key to the JSON string
-                String key = parts[0].trim();
-                JSON_str = JSON_str + " \"" + key + "\":";
-
-                // Attach the value to the JSON string
-                String value = parts[1];
-                for (int i=2; i<parts.length; i++) {    
-                    value = value + ":" +parts[i].trim(); // to caputre 15/04:00pm as a value
-                }
-                if (value.matches("-?\\d+(\\.\\d+)?")) { // if the value is a number, no need to add quotes
-                    JSON_str += value;
-                } else {
-                    JSON_str = JSON_str + "\"" + value +"\"";
-                }
+        String JSON_str = "{"; // add open bracket
+        for (String line:lines) {
+            // add , to the end of previous field, if it is not the first field
+            if (JSON_str.equals("{")){
+                JSON_str += "\n";
+            } else {
+                JSON_str += ",\n";
             }
-            JSON_str += "\n}\n";
-            return JSON_str;
-        } catch (IOException e) {
-            return "";
+            
+            // Split line by ; to find key and value 
+            String[] parts = line.split(":");
+            
+            // validate the string can be converted to JSON format
+            if (parts.length < 2) {
+                return "";
+            }
+
+            // Attach the key to the JSON string
+            String key = parts[0].trim();
+            JSON_str = JSON_str + " \"" + key + "\":";
+            
+            // Attach the value to the JSON string
+            String value = parts[1].trim();
+            for (int i=2; i<parts.length; i++) {    
+                value = value + ":" +parts[i].trim(); // to caputre 15/04:00pm as a value
+            }
+            if (value.matches("-?\\d+(\\.\\d+)?")) { // if the value is a number, no need to add quotes
+                JSON_str += value;
+            } else {
+                JSON_str = JSON_str + "\"" + value +"\"";
+            }
         }
+
+        JSON_str += "\n}"; // add closing bracket
+        return JSON_str;
     }
 
     // This functions takes in a JSON str (simple ones without nesting brackets, and with \n at the end of each entry), and returns a plain string. 
@@ -64,5 +68,55 @@ public class Parser {
         }
         // strip brackets
         return str.substring(1, str.length()-2);
+    }
+
+    // This function opens a txt file and reads line by line, concatenate the lines and return a big string.
+    public String ReadTXTFile(String FilePath) {
+        String str = "";
+        try (BufferedReader reader = new BufferedReader(new FileReader(FilePath))) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                str = str + line + "\n";
+            }
+            return str;
+        } catch (IOException e) {
+            return "";
+        }
+    }
+
+    // This function opens a txt file and convert its content to JSON format, providing it's valid. otherwise return empty string.
+    public String txt2JSON(String FilePath) {
+        String JSON_str = "";
+        try (BufferedReader reader = new BufferedReader(new FileReader(FilePath))) {
+            String line = reader.readLine();
+            String entry = "";
+
+            System.out.println(line);
+
+            // String entry = line;
+            while ((line = reader.readLine()) != null) {
+                System.out.println(line);
+                if (line.isEmpty() && !entry.isEmpty()) {
+                    // convert the entry to JSON format and concatenate to JSON_str
+                    String JSON_entry = str2JSON(entry);
+                    JSON_str = JSON_str + JSON_entry + ",\n";
+                    entry = ""; 
+                } else {
+                    //  concatenate to entry
+                    entry = entry + line + "\n";
+                }
+            }
+            if(!entry.isEmpty()) {
+                // convert the entry to JSON format and concatenate to JSON_str
+                String JSON_entry = str2JSON(entry);
+                JSON_str = JSON_str + JSON_entry;
+            }
+
+            JSON_str = "{\n" + JSON_str.trim() + "\n}";
+            System.out.println("txt2JSON parsed: \n"+JSON_str);
+            return JSON_str;
+        } catch (IOException e) {
+            return "";
+        }
     }
 }
