@@ -31,62 +31,81 @@ public class ClientHandler implements Runnable {
     public void run() {
         // Listen for client requests
         try {
-            // Read in the request
-            String request = "";
-            String line = bufferedReader.readLine();
-            
-            while (line != null && !line.isEmpty()) {
-                request = request + line + "\n";
-                line = bufferedReader.readLine();
+            // Read in the first line of request
+            String request = bufferedReader.readLine();
+
+            // Check if the request is GET or PUT
+            if (request.split(" ")[0].equals("GET")) {
+                ParseGETRequest(request);
+            } else if (request.split(" ")[0].equals("PUT")) {
+                ParsePUTRequest(request);
+            } else {
+                SendMessage("400: Bad request\n");
             }
-            System.out.println("quack: --------------\n"+request+"------------");
-            
-            // Parse the request
-            ParseHTTPRequest(request);
         } catch (IOException e){
             CloseConnection();
         }
     }
 
-    // This function parses the request and send response accordingly. It returns true if the request is valid, otherwise false.
-    public void ParseHTTPRequest(String request) {
+    // This function parses PUT request and send response accordingly
+    public void ParsePUTRequest(String request) {
         try {
-            // split the string by space
-            String[] parts = request.split(" ");
+            // Read till the connection closes or the closing bracket
+            String line = bufferedReader.readLine();
+            while (line != null && !line.equals("}")) {
+                request = request + line + "\n";
+                line = bufferedReader.readLine();
+            }
+            request = request + line + "\n";
+            System.out.println("quack: --------------\n"+request+"------------");
 
-            // Parse request: GET /weather HTTP/1.1\n Host:
-            if (parts.length>1 && parts[0].equals("GET")) {
-                String[] path_parts = parts[1].split("/");
-                if (path_parts.length > 1 && path_parts[1].equals("weather")) {
-                    if (path_parts.length > 2) {
-                        SendMessage("requested for weather from station " + path_parts[2]);
-                    } else {
-                        SendMessage("HTTP/1.1 200 OK\r\n" +
-                        "Content-Type: json\r\n" +
-                        "\r\n" + this.Parser.txt2JSON("./weather.txt"));
-                        CloseConnection();
-                    }
+            // Parse request
+            String[] resource = request.split(" ")[1].split("/");
+            // If it is /weather/stationID or /weather
+            if (resource.length > 1 && resource[1].equals("weather.json")) {
+                SendMessage("HTTP/1.1 200 OK\r\n");
+            } else {
+                // method doest exist
+                SendMessage("400 error: Bad request\n");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            CloseConnection();
+        }    
+    }
+
+    // This function parses GET request and send response accordingly
+    public void ParseGETRequest(String request) {
+        try {
+            // Read till the connection closes or the closing bracket
+            String line = bufferedReader.readLine();
+            while (line != null && !line.isEmpty()) {
+                request = request + line + "\n";
+                line = bufferedReader.readLine();
+            }
+            request = request + line + "\n";
+            System.out.println("quack: --------------\n"+request+"------------");
+
+            // Parse request
+            String[] resource = request.split(" ")[1].split("/");
+            // If it is /weather/stationID or /weather
+            if (resource.length > 1 && resource[1].equals("weather")) {
+                if (resource.length > 2) { // If it is /weather/stationID
+                    SendMessage("requested for weather from station " + resource[2]);
                 } else {
-                    // method doest exist
-                    SendMessage("405 error: Method Not Allowed");
-                }
-            } else if (parts.length>1 && parts[0].equals("POST")) {
-                if (parts[1].equals("/update-weather")) {
-                    
-                } else {
-                    // method doest exist
-                    SendMessage("400 error: Bad Request");
+                    SendMessage("HTTP/1.1 200 OK\r\n" +
+                    "Content-Type: json\r\n" +
+                    "\r\n" + this.Parser.txt2JSON("./weather.txt"));
+                    CloseConnection();
                 }
             } else {
                 // method doest exist
-                System.out.println(request);
-                SendMessage("400 error: Bad Request");
+                SendMessage("405 error: Method Not Allowed");
             }
-        } catch (Exception e) {
-            // Bad request
+        } catch (IOException e) {
             e.printStackTrace();
-            SendMessage("here 400 error: Bad Request");
-        }
+            CloseConnection();
+        }    
     }
 
     public void SendMessage(String msg) {

@@ -11,5 +11,8 @@ start:
 client:
 	java GETClient "http://127.0.0.1:4567" 
 
+content:
+	java ContentServer "http://127.0.0.1:4567" "./weather_station1.txt"
+
 clean:
 	rm *.class
