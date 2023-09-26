@@ -89,6 +89,38 @@ public class Parser {
         }
     }
 
+    // This functions takes a station ID and return the entry in JSON format
+    public String GetEntrybyID(String FilePath, String station_ID) {
+        
+                
+        try (BufferedReader reader = new BufferedReader(new FileReader(FilePath))) {
+            String line;
+            String result = "{\n";
+
+            // parse the database file
+            while ((line = reader.readLine()) != null) {
+                // search for the id
+                if (line.trim().equals("\"id\":\""+station_ID+"\",")) {
+                    result = result + line + "\n"; 
+                    break;
+                }
+            }
+            
+            // Can't find the station
+            if (line == null) {
+                return "";
+            }
+
+            // Concatenate the entry till reaching "}"
+            while (!(line = reader.readLine()).trim().matches("}.*")) {
+                result = result + line + "\n"; 
+            }
+            return result+"}\n";
+        } catch (IOException e) {
+            return null;
+        }
+    }
+
     // This function opens a txt file and convert its content to JSON format, providing it's valid. otherwise return empty string.
     public String txt2JSON(String FilePath) {
         String JSON_str = "";
@@ -123,5 +155,10 @@ public class Parser {
         } catch (IOException e) {
             return "";
         }
+    }
+
+    public int GetResponseCode(String response) {
+        String[] parts = response.split(" ");
+        return Integer.parseInt(parts[1]);
     }
 }

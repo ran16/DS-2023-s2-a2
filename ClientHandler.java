@@ -91,7 +91,13 @@ public class ClientHandler implements Runnable {
             // If it is /weather/stationID or /weather
             if (resource.length > 1 && resource[1].equals("weather")) {
                 if (resource.length > 2) { // If it is /weather/stationID
-                    SendMessage("requested for weather from station " + resource[2]);
+                    String payload = this.Parser.GetEntrybyID("./weather.json", resource[2]);
+                    System.out.println(payload);
+                    
+                    SendMessage("HTTP/1.1 200 OK\r\n" +
+                    "Content-Type: json\r\n" +
+                    "\r\n" + payload);
+                    CloseConnection();
                 } else {
                     SendMessage("HTTP/1.1 200 OK\r\n" +
                     "Content-Type: json\r\n" +

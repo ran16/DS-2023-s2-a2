@@ -125,7 +125,19 @@ public class GETClient {
 
             // Send GET request
             String response = client.GetWeather(url.toString(), stationID);
-            client.PrintWeather(response);
+            try {
+                int respons_code = client.Parser.GetResponseCode(response);
+                if (respons_code == 200) {
+                    System.out.println("\nWeather " + stationID + ":\n");
+                    client.PrintWeather(response);
+                } else {
+                    System.out.println(respons_code);
+                    client.CloseConnection();
+                }
+            } catch (Exception e) {
+                System.out.println("Did not get valid response. Please try again.");
+                client.CloseConnection();
+            }
         } catch (IOException e) {
             System.out.println("failed to connect to server. Please check the host and port");
             return;
