@@ -95,7 +95,7 @@ public class ClientHandler implements Runnable {
                 } else {
                     SendMessage("HTTP/1.1 200 OK\r\n" +
                     "Content-Type: json\r\n" +
-                    "\r\n" + this.Parser.txt2JSON("./weather.txt"));
+                    "\r\n" + this.Parser.readFile("./weather.json"));
                     CloseConnection();
                 }
             } else {

@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+
 public class Parser {
 
     // This function convert a string to JSON format.
@@ -48,39 +49,43 @@ public class Parser {
     // This functions takes in a JSON str (simple ones without nesting brackets, and with \n at the end of each entry), and returns a plain string. 
     public String JSON2String(String JSON_str) {
         String str = "";
-        String[] parts = JSON_str.trim().split(",\n");
+        String[] parts = JSON_str.trim().split("\n");
 
         // Parse line by line
         for (String p : parts) {
-            // Strip quotes
-            String temp = "";
-            String[] sections = p.split("\"");
-            for (int i=0; i<sections.length; i++) {
-                temp = temp+ sections[i];
-            }
-
-            // Strip commas
-            if (temp.length() > 1 && temp.substring(temp.length()-1, temp.length()-1).equals(",")) {
-                str = str + temp.substring(0, temp.length()-2) + "\n";
-            } else {
-                str = str + temp + "\n";
+            p = p.trim();
+            if (p.matches("\".*"))
+            {
+                for (int i=0; i<p.length(); i++){ 
+                    char c = p.charAt(i);
+                    if (i == p.length()-1) { // Strip commas
+                        if (c != ',') { 
+                            str += c; 
+                        }
+                    } else if (c != '\"') { // Strip quotes
+                        str += c;
+                    }
+                }
+                str += "\n";
+            } else if (p.matches("},")){ // add a line break for new entry
+                str += "\n";
             }
         }
         // strip brackets
-        return str.substring(1, str.length()-2);
+        return str;
     }
 
     // This function opens a txt file and reads line by line, concatenate the lines and return a big string.
-    public String ReadTXTFile(String FilePath) {
+    public String readFile(String FilePath) {
         String str = "";
         try (BufferedReader reader = new BufferedReader(new FileReader(FilePath))) {
             String line;
             while ((line = reader.readLine()) != null) {
-                str = str + line + "\n";
+                str = str + line + "\r\n";
             }
             return str;
         } catch (IOException e) {
-            return "";
+            return null;
         }
     }
 
@@ -88,7 +93,7 @@ public class Parser {
     public String txt2JSON(String FilePath) {
         String JSON_str = "";
         try (BufferedReader reader = new BufferedReader(new FileReader(FilePath))) {
-            String line = reader.readLine();
+            String line = "";
             String entry = "";
 
             System.out.println(line);
@@ -102,7 +107,7 @@ public class Parser {
                     JSON_str = JSON_str + JSON_entry + ",\n";
                     entry = ""; 
                 } else {
-                    //  concatenate to entry
+                    // concatenate to entry
                     entry = entry + line + "\n";
                 }
             }
@@ -112,7 +117,7 @@ public class Parser {
                 JSON_str = JSON_str + JSON_entry;
             }
 
-            JSON_str = "{\n" + JSON_str.trim() + "\n}";
+            JSON_str = "[\n" + JSON_str.trim() + "\n]";
             System.out.println("txt2JSON parsed: \n"+JSON_str);
             return JSON_str;
         } catch (IOException e) {
