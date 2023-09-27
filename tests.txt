@@ -1,0 +1,2 @@
+1. Content server sends incorrect json file: get 500
+2. Content server sends empty PUT request: get 204

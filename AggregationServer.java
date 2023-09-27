@@ -1,13 +1,21 @@
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashMap;
+import java.util.Set;
 
 public class AggregationServer {
     private ServerSocket serverSocket;
 
+    private HashMap<String, WeatherEntry> database; // used to store weather data. key is the station ID and the value is the corresponding weatherentry object
+    private HashMap<String, Set<String>> AliveContentServers; // used to keep track of content servers and station IDs reported by each server
+    
+
     // constructor
     public AggregationServer(ServerSocket serverSocket) {
         this.serverSocket = serverSocket;
+        this.database = new HashMap<>();
+        this.AliveContentServers = new HashMap<>();
     }
 
     // This function starts the server.
@@ -22,7 +30,7 @@ public class AggregationServer {
                 System.out.println("A client has connected.");          
 
                 // Create a client handler to handler the client request
-                ClientHandler clientHandler = new ClientHandler(client_soc);
+                ClientHandler clientHandler = new ClientHandler(client_soc, database, AliveContentServers);
 
                 // Spawn a new thread to handler the client request
                 Thread thread = new Thread(clientHandler);

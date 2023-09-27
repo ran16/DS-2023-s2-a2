@@ -4,19 +4,25 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.util.HashMap;
+import java.util.Set;
 
 public class ClientHandler implements Runnable {
     private Socket client_soc;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
     private Parser Parser; // create a Parser for string <-> JSON
-    
+    private HashMap<String, WeatherEntry> database; // used to store weather data. key is the station ID and the value is the corresponding weatherentry object
+    private HashMap<String, Set<String>> AliveContentServers;
+
     // Constructor
-    public ClientHandler(Socket socket) {
+    public ClientHandler(Socket socket, HashMap<String, WeatherEntry> database, HashMap<String, Set<String>> AliveContentServers) {
         try {
             // This is the client socket
             this.client_soc = socket;
             this.Parser = new Parser();
+            this.database = database;
+            this.AliveContentServers = AliveContentServers;
 
             // Turn the socket's byte stream into char stream, and wrap it in a buffer for both read and write.
             this.bufferedReader = new BufferedReader(new InputStreamReader(client_soc.getInputStream()));
@@ -36,11 +42,23 @@ public class ClientHandler implements Runnable {
 
             // Check if the request is GET or PUT
             if (request.split(" ")[0].equals("GET")) {
-                ParseGETRequest(request);
+                // validate the header
+                if (request.matches("GET /weather(/[a-zA-Z0-9]*)? .*")) {
+                    ParseGETRequest(request+"\n");
+                } else {
+                    SendMessage("HTTP 400: Bad request\n");
+                    CloseConnection();
+                }
             } else if (request.split(" ")[0].equals("PUT")) {
-                ParsePUTRequest(request);
+                // validate the header
+                if (request.matches("PUT /weather.json .*")) {
+                    ParsePUTRequest(request+"\n");
+                } else {
+                    SendMessage("HTTP 400: Bad request\n");
+                    CloseConnection();
+                }
             } else {
-                SendMessage("400: Bad request\n");
+                SendMessage("HTTP 400: Bad request\n");
             }
         } catch (IOException e){
             CloseConnection();
@@ -50,26 +68,26 @@ public class ClientHandler implements Runnable {
     // This function parses PUT request and send response accordingly
     public void ParsePUTRequest(String request) {
         try {
-            // Read till the connection closes or the closing bracket
+            // Read till the connection closes or the closing square bracket
             String line = bufferedReader.readLine();
-            while (line != null && !line.equals("}")) {
+            while (line != null && !line.equals("]")) {
                 request = request + line + "\n";
                 line = bufferedReader.readLine();
             }
             request = request + line + "\n";
-            System.out.println("quack: --------------\n"+request+"------------");
 
-            // Parse request
-            String[] resource = request.split(" ")[1].split("/");
-            // If it is /weather/stationID or /weather
-            if (resource.length > 1 && resource[1].equals("weather.json")) {
-                SendMessage("HTTP/1.1 200 OK\r\n");
+            // Get the data in the body of the PUT request
+            String new_data = Parser.extractBody(request);
+
+            // Check for empty requests
+            if (new_data.isEmpty() || new_data.equals("[]")) {
+                SendMessage("204: no content\n");
             } else {
-                // method doest exist
-                SendMessage("400 error: Bad request\n");
-            }
+                SendMessage("HTTP/1.1 200 OK\r\n");
+                // Update the weather using the new data
+                UpdateWeather(new_data);
+            }          
         } catch (IOException e) {
-            e.printStackTrace();
             CloseConnection();
         }    
     }
@@ -86,17 +104,18 @@ public class ClientHandler implements Runnable {
             request = request + line + "\n";
             System.out.println("quack: --------------\n"+request+"------------");
 
-            // Parse request
-            String[] resource = request.split(" ")[1].split("/");
-            // If it is /weather/stationID or /weather
-            if (resource.length > 1 && resource[1].equals("weather")) {
-                if (resource.length > 2) { // If it is /weather/stationID
-                    String payload = this.Parser.GetEntrybyID("./weather.json", resource[2]);
-                    System.out.println(payload);
+            // Get the station ID from request
+            String[] parts = request.split(" ")[1].split("/");
+                if (parts.length > 2) { // If it is /weather/stationID
+                    WeatherEntry result = this.database.get(parts[2]);
+                    String payload = "";
+                    if (result != null) {
+                       payload = Parser.Obj2JSON(result);
+                    }
                     
                     SendMessage("HTTP/1.1 200 OK\r\n" +
                     "Content-Type: json\r\n" +
-                    "\r\n" + payload);
+                    "\r\n" + "[\n"+payload +"\n]\n");
                     CloseConnection();
                 } else {
                     SendMessage("HTTP/1.1 200 OK\r\n" +
@@ -104,14 +123,25 @@ public class ClientHandler implements Runnable {
                     "\r\n" + this.Parser.readFile("./weather.json"));
                     CloseConnection();
                 }
-            } else {
-                // method doest exist
-                SendMessage("405 error: Method Not Allowed");
-            }
         } catch (IOException e) {
             e.printStackTrace();
             CloseConnection();
         }    
+    }
+
+    public void UpdateWeather(String new_data) {
+        // Convert the data entries to WeaterEntry objects
+        try {
+            WeatherEntry[] entries = Parser.JSON2Obj(new_data);
+
+            for (WeatherEntry entry:entries) {
+                // update in database
+                this.database.put(entry.getID(), entry);
+            } 
+        } catch (Exception e) {
+            // Incorrect JSON format
+            SendMessage("500 - internal server error");
+        }   
     }
 
     public void SendMessage(String msg) {

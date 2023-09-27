@@ -2,10 +2,14 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 
 public class Parser {
+    private Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    // This function convert a string to JSON format.
+    // plain string ==> JSON string
     public String str2JSON(String str) {
         String[] lines = str.split("\n");
 
@@ -46,7 +50,7 @@ public class Parser {
         return JSON_str;
     }
 
-    // This functions takes in a JSON str (simple ones without nesting brackets, and with \n at the end of each entry), and returns a plain string. 
+    // JSON string ==> plain string
     public String JSON2String(String JSON_str) {
         String str = "";
         String[] parts = JSON_str.trim().split("\n");
@@ -74,6 +78,8 @@ public class Parser {
         // strip brackets
         return str;
     }
+
+
 
     // This function opens a txt file and reads line by line, concatenate the lines and return a big string.
     public String readFile(String FilePath) {
@@ -160,5 +166,44 @@ public class Parser {
     public int GetResponseCode(String response) {
         String[] parts = response.split(" ");
         return Integer.parseInt(parts[1]);
+    }
+
+    // This function extract the body from PUT request
+    public String extractBody(String request) {
+        String body ="";
+
+        boolean insideBlock = false;
+
+        String[] lines = request.split("\n");
+
+        for (String line:lines) {
+            line = line.trim();
+
+            if (line.equals("[")) {
+                insideBlock = true;
+            }
+
+            if (insideBlock) {
+                body = body + line+ "\n";
+            }
+
+            if (line.equals("]")) {
+                insideBlock = false;
+            }
+        }
+
+        return body;
+    }
+
+    // This function takes in an array of data entries and return a list of data entry objects
+    public WeatherEntry[] JSON2Obj(String entry) {
+        return gson.fromJson(entry, WeatherEntry[].class);
+    }
+
+    public String Obj2JSON(WeatherEntry obj) {
+        if (obj == null) {
+            System.out.println("quack!");
+        }
+        return gson.toJson(obj);
     }
 }

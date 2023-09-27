@@ -9,13 +9,19 @@ test:
 	java -cp .:./gson-2.10.1.jar TxtToJsonConverter
 
 start:
-	java AggregationServer
+	java -cp .:./gson-2.10.1.jar AggregationServer
 
 client:
-	java GETClient "http://127.0.0.1:4567"  IDS60903
+	java -cp .:./gson-2.10.1.jar GETClient "http://127.0.0.1:4567"  IDS60903
+
+client2:
+	java -cp .:./gson-2.10.1.jar GETClient "http://127.0.0.1:4567" 
+
+client3:
+	java -cp .:./gson-2.10.1.jar GETClient "http://127.0.0.1:4567" IDS40903
 
 content:
-	java ContentServer "http://127.0.0.1:4567" "./weather_station1.txt"
+	java -cp .:./gson-2.10.1.jar ContentServer "http://127.0.0.1:4567" "./weather_station1.txt"
 
 clean:
 	rm *.class

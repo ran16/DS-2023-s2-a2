@@ -13,7 +13,7 @@ public class ContentServer {
     private BufferedWriter bufferedWriter;
     private Parser Parser;
     private String FilePath;
-    private String StationID;
+    private String ContentServerID;
 
     // This function creates a client object
     public ContentServer(Socket socket) {
@@ -50,11 +50,11 @@ public class ContentServer {
     public String UpdateWeather(String dest) {
         // send a GET request to get weather data
         String payload = this.Parser.txt2JSON(this.FilePath);
-        String msg = "PUT /weather.json HTTP/1.1\r" +
-            "User-Agent: ATOMClient/1/0c\r" +
-            "Content-Type: json\r" +
-            "Content-Length: " + payload.getBytes().length + "\r" +
-            "\r" + 
+        String msg = "PUT /weather.json HTTP/1.1\r\n" +
+            "User-Agent: ATOMClient/1/0c\r\n" +
+            "Content-Type: json\r\n" +
+            "Content-Length: " + payload.getBytes().length + "\r\n" +
+            "\r\n" + 
             payload + "\n";
         // System.out.println(msg);
         SendMessage(dest,msg);

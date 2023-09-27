@@ -70,13 +70,13 @@ public class GETClient {
     }
 
     // This function prints the weather from the response
-    public void PrintWeather(String response) {
-        // Find where the JSON content starts by finding the index of the first {
-        int i=0;
-        while (response.charAt(i) != '{') {
-            i++;
+    public void PrintWeather(String data) {
+        String weather = Parser.JSON2String(data);
+        if (weather.isEmpty()) {
+            System.out.println("Sorry, weather data cannot be found for this station.");
+        } else {
+            System.out.println(weather);
         }
-        System.out.println(Parser.JSON2String(response.substring(i, response.length()-1)));
     }
 
     public void SendMessage(String dest, String msg) {
@@ -129,10 +129,9 @@ public class GETClient {
                 int respons_code = client.Parser.GetResponseCode(response);
                 if (respons_code == 200) {
                     System.out.println("\nWeather " + stationID + ":\n");
-                    client.PrintWeather(response);
+                    client.PrintWeather(client.Parser.extractBody(response));
                 } else {
-                    System.out.println(respons_code);
-                    client.CloseConnection();
+                    System.out.println(response);
                 }
             } catch (Exception e) {
                 System.out.println("Did not get valid response. Please try again.");
