@@ -106,23 +106,26 @@ public class ClientHandler implements Runnable {
 
             // Get the station ID from request
             String[] parts = request.split(" ")[1].split("/");
-                if (parts.length > 2) { // If it is /weather/stationID
-                    WeatherEntry result = this.database.get(parts[2]);
-                    String payload = "";
-                    if (result != null) {
-                       payload = Parser.Obj2JSON(result);
-                    }
-                    
-                    SendMessage("HTTP/1.1 200 OK\r\n" +
-                    "Content-Type: json\r\n" +
-                    "\r\n" + "[\n"+payload +"\n]\n");
-                    CloseConnection();
-                } else {
-                    SendMessage("HTTP/1.1 200 OK\r\n" +
-                    "Content-Type: json\r\n" +
-                    "\r\n" + this.Parser.readFile("./weather.json"));
-                    CloseConnection();
+            String payload = "";
+            if (parts.length > 2) { // If it is /weather/stationID
+                // find the station's entry
+                WeatherEntry result = this.database.get(parts[2]);
+                if (result != null) {
+                    payload = Parser.Obj2JSON(result);
                 }
+                
+                SendMessage("HTTP/1.1 200 OK\r\n" +
+                "Content-Type: json\r\n" +
+                "\r\n" + "[\n"+payload +"\n]\n");
+                CloseConnection();
+            } else {
+                // send all weather data
+                payload = this.Parser.dump(database);
+                SendMessage("HTTP/1.1 200 OK\r\n" +
+                "Content-Type: json\r\n" +
+                "\r\n" + payload + "\n");
+                CloseConnection();
+            }
         } catch (IOException e) {
             e.printStackTrace();
             CloseConnection();

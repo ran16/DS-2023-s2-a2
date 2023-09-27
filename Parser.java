@@ -1,6 +1,11 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -156,7 +161,6 @@ public class Parser {
             }
 
             JSON_str = "[\n" + JSON_str.trim() + "\n]";
-            System.out.println("txt2JSON parsed: \n"+JSON_str);
             return JSON_str;
         } catch (IOException e) {
             return "";
@@ -195,15 +199,41 @@ public class Parser {
         return body;
     }
 
-    // This function takes in an array of data entries and return a list of data entry objects
+    // JSON string ==> WeatherEntry object
     public WeatherEntry[] JSON2Obj(String entry) {
         return gson.fromJson(entry, WeatherEntry[].class);
     }
 
+    // WeatherEntry object ==> JSON string 
     public String Obj2JSON(WeatherEntry obj) {
         if (obj == null) {
             System.out.println("quack!");
         }
         return gson.toJson(obj);
+    }
+
+    public String dump(HashMap<String, WeatherEntry> database) {
+        List<WeatherEntry> list = new ArrayList<>();
+        
+        // Create an iterator 
+        Iterator<Map.Entry<String, WeatherEntry>> iterator = database.entrySet().iterator();
+
+        // Iterate through the entries
+        while (iterator.hasNext()) {
+            Map.Entry<String, WeatherEntry> entry = iterator.next();
+            WeatherEntry value = entry.getValue();
+            // append to list
+            list.add(value);
+        }
+
+        // Convert the list of weather data to JSON
+        String result = "";
+        try {
+            result = gson.toJson(list);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "";
+        }
+        return result;
     }
 }

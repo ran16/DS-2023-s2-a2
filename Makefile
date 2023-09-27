@@ -12,7 +12,7 @@ start:
 	java -cp .:./gson-2.10.1.jar AggregationServer
 
 client:
-	java -cp .:./gson-2.10.1.jar GETClient "http://127.0.0.1:4567"  IDS60903
+	java -cp .:./gson-2.10.1.jar GETClient "http://127.0.0.1:4567"  IDS60901
 
 client2:
 	java -cp .:./gson-2.10.1.jar GETClient "http://127.0.0.1:4567" 
@@ -20,8 +20,11 @@ client2:
 client3:
 	java -cp .:./gson-2.10.1.jar GETClient "http://127.0.0.1:4567" IDS40903
 
-content:
-	java -cp .:./gson-2.10.1.jar ContentServer "http://127.0.0.1:4567" "./weather_station1.txt"
+content1:
+	java -cp .:./gson-2.10.1.jar ContentServer "http://127.0.0.1:4567" "./weather1.txt"
+
+content2:
+	java -cp .:./gson-2.10.1.jar ContentServer "http://127.0.0.1:4567" "./weather2.txt"
 
 clean:
 	rm *.class
