@@ -14,9 +14,12 @@ public class ContentServer {
     private Parser Parser;
     private String FilePath;
     private String ContentServerID;
+    private int LamportClock;
 
     // This function creates a client object
     public ContentServer(Socket socket) {
+        // Initialize lamport clock to be 0
+        this.LamportClock = 0;
         try {
             this.my_soc = socket;
             this.Parser = new Parser();
@@ -56,7 +59,7 @@ public class ContentServer {
             "Content-Length: " + payload.getBytes().length + "\r\n" +
             "\r\n" + 
             payload + "\n";
-        // System.out.println(msg);
+        System.out.println(msg);
         SendMessage(dest,msg);
 
         // Recieve the response
@@ -88,7 +91,7 @@ public class ContentServer {
         }
     }
 
-    public static void main(String args[]) throws IOException{
+    public static void main(String args[]) throws IOException, InterruptedException{
         if (args.length < 1) {
             System.out.println("Please provide valid url.");
             return;
@@ -110,15 +113,24 @@ public class ContentServer {
         // Connect
         try{
             Socket socket = new Socket(host, port);
-            ContentServer station = new ContentServer(socket);
+            ContentServer cs = new ContentServer(socket);
             System.out.println("Content Server is connected");
             
             // Get file path to the weather
-            station.FilePath = args[1];
+            cs.FilePath = args[1];
 
             // Send PUT request
-            String response = station.UpdateWeather(url.toString());
-            System.out.println(response);
+            while (cs.my_soc.isConnected()) {
+                System.out.println("Sending weather update...\n");
+                String response = cs.UpdateWeather(url.toString());
+                int respons_code = cs.Parser.GetResponseCode(response);
+
+                // If success, sleep for 10 seconds and update a gain. Otherwise update immediately.
+                if ( respons_code == 200) {
+                    Thread.sleep(10000);
+                } 
+            }
+            
         } catch (IOException e) {
             System.out.println("failed to connect to server. Please check the host and port");
             return;

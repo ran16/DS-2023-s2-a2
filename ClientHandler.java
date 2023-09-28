@@ -4,25 +4,19 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
-import java.util.HashMap;
-import java.util.Set;
 
 public class ClientHandler implements Runnable {
     private Socket client_soc;
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
     private Parser Parser; // create a Parser for string <-> JSON
-    private HashMap<String, WeatherEntry> database; // used to store weather data. key is the station ID and the value is the corresponding weatherentry object
-    private HashMap<String, Set<String>> AliveContentServers;
 
     // Constructor
-    public ClientHandler(Socket socket, HashMap<String, WeatherEntry> database, HashMap<String, Set<String>> AliveContentServers) {
+    public ClientHandler(Socket socket) {
         try {
             // This is the client socket
             this.client_soc = socket;
             this.Parser = new Parser();
-            this.database = database;
-            this.AliveContentServers = AliveContentServers;
 
             // Turn the socket's byte stream into char stream, and wrap it in a buffer for both read and write.
             this.bufferedReader = new BufferedReader(new InputStreamReader(client_soc.getInputStream()));
@@ -36,33 +30,36 @@ public class ClientHandler implements Runnable {
     @Override
     public void run() {
         // Listen for client requests
-        try {
-            // Read in the first line of request
-            String request = bufferedReader.readLine();
+        while (this.client_soc.isConnected()) {
+            try {
+                // Read in the first line of request
+                String request = bufferedReader.readLine();
 
-            // Check if the request is GET or PUT
-            if (request.split(" ")[0].equals("GET")) {
-                // validate the header
-                if (request.matches("GET /weather(/[a-zA-Z0-9]*)? .*")) {
-                    ParseGETRequest(request+"\n");
+                // Check if the request is GET or PUT
+                if (request.split(" ")[0].equals("GET")) {
+                    // validate the header
+                    if (request.matches("GET /weather(/[a-zA-Z0-9]*)? .*")) {
+                        ParseGETRequest(request+"\n");
+                    } else {
+                        SendMessage("Error 400 Bad request\n");
+                        CloseConnection();
+                    }
+                } else if (request.split(" ")[0].equals("PUT")) {
+                    // validate the header
+                    if (request.matches("PUT /weather.json .*")) {
+                        ParsePUTRequest(request+"\n");
+                    } else {
+                        SendMessage("Error 400 Bad request\n");
+                        CloseConnection();
+                    }
                 } else {
-                    SendMessage("HTTP 400: Bad request\n");
-                    CloseConnection();
+                    SendMessage("Error 400 Bad request\n");
                 }
-            } else if (request.split(" ")[0].equals("PUT")) {
-                // validate the header
-                if (request.matches("PUT /weather.json .*")) {
-                    ParsePUTRequest(request+"\n");
-                } else {
-                    SendMessage("HTTP 400: Bad request\n");
-                    CloseConnection();
-                }
-            } else {
-                SendMessage("HTTP 400: Bad request\n");
+            } catch (IOException e){
+                CloseConnection();
+                break;
             }
-        } catch (IOException e){
-            CloseConnection();
-        }
+        } 
     }
 
     // This function parses PUT request and send response accordingly
@@ -109,7 +106,7 @@ public class ClientHandler implements Runnable {
             String payload = "";
             if (parts.length > 2) { // If it is /weather/stationID
                 // find the station's entry
-                WeatherEntry result = this.database.get(parts[2]);
+                WeatherEntry result = AggregationServer.database.get(parts[2]);
                 if (result != null) {
                     payload = Parser.Obj2JSON(result);
                 }
@@ -120,7 +117,7 @@ public class ClientHandler implements Runnable {
                 CloseConnection();
             } else {
                 // send all weather data
-                payload = this.Parser.dump(database);
+                payload = this.Parser.dump(AggregationServer.database);
                 SendMessage("HTTP/1.1 200 OK\r\n" +
                 "Content-Type: json\r\n" +
                 "\r\n" + payload + "\n");
@@ -140,11 +137,11 @@ public class ClientHandler implements Runnable {
 
             for (WeatherEntry entry:entries) {
                 // update in database
-                this.database.put(entry.getID(), entry);
+                AggregationServer.database.put(entry.getID(), entry);
             } 
         } catch (Exception e) {
             // Incorrect JSON format
-            SendMessage("500 - internal server error");
+            SendMessage("Error 500 internal server error");
         }   
     }
 

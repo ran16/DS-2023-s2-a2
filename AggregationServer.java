@@ -7,14 +7,13 @@ import java.util.Set;
 public class AggregationServer {
     private ServerSocket serverSocket;
 
-    private HashMap<String, WeatherEntry> database; // used to store weather data. key is the station ID and the value is the corresponding weatherentry object
-    private HashMap<String, Set<String>> AliveContentServers; // used to keep track of content servers and station IDs reported by each server
+    public static HashMap<String, WeatherEntry> database = new HashMap<>(); // used to store weather data. key is the station ID and the value is the corresponding weatherentry object
+    private static HashMap<String, Set<String>> AliveContentServers = new HashMap<>(); // used to keep track of content servers and station IDs reported by each server
+    private static int LamportClock = 0;
 
     // constructor
     public AggregationServer(ServerSocket serverSocket) {
         this.serverSocket = serverSocket;
-        this.database = new HashMap<>();
-        this.AliveContentServers = new HashMap<>();
     }
 
     // This function starts the server.
@@ -29,7 +28,7 @@ public class AggregationServer {
                 System.out.println("A client has connected.");          
 
                 // Create a client handler to handler the client request
-                ClientHandler clientHandler = new ClientHandler(client_soc, database, AliveContentServers);
+                ClientHandler clientHandler = new ClientHandler(client_soc);
 
                 // Spawn a new thread to handler the client request
                 Thread thread = new Thread(clientHandler);

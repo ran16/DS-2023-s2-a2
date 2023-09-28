@@ -33,4 +33,3 @@ rel_hum:60
 wind_dir:S
 wind_spd_kmh:15
 wind_spd_kt:2
-

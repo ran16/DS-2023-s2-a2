@@ -11,10 +11,15 @@ public class GETClient {
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
     private Parser Parser; // create a Parser for string <-> JSON
+    private int LamportClock;
     
 
     // This function creates a client object
     public GETClient(Socket socket) {
+        // Initialize lamport clock to be 0
+        this.LamportClock = 0;
+
+        // set up IO
         try {
             this.my_soc = socket;
             this.Parser = new Parser();

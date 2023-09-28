@@ -139,11 +139,8 @@ public class Parser {
             String line = "";
             String entry = "";
 
-            System.out.println(line);
-
-            // String entry = line;
             while ((line = reader.readLine()) != null) {
-                System.out.println(line);
+                // empty line means a new entry
                 if (line.isEmpty() && !entry.isEmpty()) {
                     // convert the entry to JSON format and concatenate to JSON_str
                     String JSON_entry = str2JSON(entry);
@@ -168,8 +165,14 @@ public class Parser {
     }
 
     public int GetResponseCode(String response) {
-        String[] parts = response.split(" ");
-        return Integer.parseInt(parts[1]);
+        System.out.println(response);
+        try {
+            String[] parts = response.split(" ");
+            return Integer.parseInt(parts[1]);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return 400;
+        }
     }
 
     // This function extract the body from PUT request
