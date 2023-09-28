@@ -9,7 +9,6 @@ public class AggregationServer {
 
     private HashMap<String, WeatherEntry> database; // used to store weather data. key is the station ID and the value is the corresponding weatherentry object
     private HashMap<String, Set<String>> AliveContentServers; // used to keep track of content servers and station IDs reported by each server
-    
 
     // constructor
     public AggregationServer(ServerSocket serverSocket) {

@@ -132,7 +132,8 @@ public class ClientHandler implements Runnable {
         }    
     }
 
-    public void UpdateWeather(String new_data) {
+    // This function lets the thread update the weather. "synchronized" keyword is used to protect race condition.
+    public synchronized void UpdateWeather(String new_data) {
         // Convert the data entries to WeaterEntry objects
         try {
             WeatherEntry[] entries = Parser.JSON2Obj(new_data);
