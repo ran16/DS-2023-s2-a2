@@ -30,13 +30,13 @@ public class ClientHandler implements Runnable {
     @Override
     public void run() {
         // Listen for client requests
-        while (this.client_soc.isConnected()) {
+        while (this.client_soc.isConnected() && !this.client_soc.isClosed()) {
             try {
                 // Read in the first line of request
                 String request = bufferedReader.readLine();
 
                 // Check if the request is GET or PUT
-                if (request.split(" ")[0].equals("GET")) {
+                if (request != null && request.split(" ")[0].equals("GET")) {
                     // validate the header
                     if (request.matches("GET /weather(/[a-zA-Z0-9]*)? .*")) {
                         ParseGETRequest(request+"\n");
@@ -44,7 +44,7 @@ public class ClientHandler implements Runnable {
                         SendMessage("Error 400 Bad request\n");
                         CloseConnection();
                     }
-                } else if (request.split(" ")[0].equals("PUT")) {
+                } else if (request != null && request.split(" ")[0].equals("PUT")) {
                     // validate the header
                     if (request.matches("PUT /weather.json .*")) {
                         ParsePUTRequest(request+"\n");
@@ -159,7 +159,6 @@ public class ClientHandler implements Runnable {
 
     // This function closes the connection
     public void CloseConnection() {
-        System.out.println("Client disconnected.");
         try {
             if (bufferedReader != null) {
                 bufferedReader.close();
@@ -169,9 +168,10 @@ public class ClientHandler implements Runnable {
             }
             if (client_soc != null) {
                 client_soc.close();
+                System.out.println("Client is disconnected");
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Failed to close connection");
         }
     }
 }
