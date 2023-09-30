@@ -36,13 +36,13 @@ public class ContentServer {
     public void CloseConnection() {
         try {
             if (bufferedReader != null) {
-            bufferedReader.close();
+                this.bufferedReader.close();
             }
             if (bufferedWriter != null) {
-                bufferedWriter.close();
+                this.bufferedWriter.close();
             }
-            if (my_soc != null) {
-                my_soc.close();
+            if (this.my_soc != null) {
+                this.my_soc.close();
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -58,7 +58,7 @@ public class ContentServer {
             "Content-Type: json\r\n" +
             "Content-Length: " + payload.getBytes().length + "\r\n" +
             "\r\n" + 
-            payload + "\n";
+            payload;
         System.out.println(msg);
         SendMessage(dest,msg);
 
@@ -72,7 +72,7 @@ public class ContentServer {
             }
             return response;
         } catch (Exception e) {
-            e.printStackTrace();
+            this.CloseConnection();
             return "";
         }
     }
@@ -84,8 +84,7 @@ public class ContentServer {
                 this.bufferedWriter.newLine();
                 this.bufferedWriter.flush();
             }  catch (Exception e) {
-                e.printStackTrace();
-                System.out.println("Something went wrong. Client disconnected.");
+                System.out.println("Something went wrong. The server has disconnected.");
                 this.CloseConnection();
             }
         }
@@ -120,15 +119,18 @@ public class ContentServer {
             cs.FilePath = args[1];
 
             // Send PUT request
-            while (cs.my_soc.isConnected()) {
-                System.out.println("Sending weather update...\n");
+            int i=0;
+            // if the socket has been connected, and the close method has not been called.
+            while (cs.my_soc.isConnected() && !cs.my_soc.isClosed()) {
+                System.out.println("Still connected. \nSending weather update "+i+"...\n");
                 String response = cs.UpdateWeather(url.toString());
                 int respons_code = cs.Parser.GetResponseCode(response);
 
                 // If success, sleep for 10 seconds and update a gain. Otherwise update immediately.
                 if ( respons_code == 200) {
+                    i++;
                     Thread.sleep(10000);
-                } 
+                } // else response_code == 201, else 4xx try again, else xxx for empty content
             }
             
         } catch (IOException e) {

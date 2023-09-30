@@ -170,7 +170,6 @@ public class Parser {
             String[] parts = response.split(" ");
             return Integer.parseInt(parts[1]);
         } catch (Exception e) {
-            e.printStackTrace();
             return 400;
         }
     }
