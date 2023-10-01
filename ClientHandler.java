@@ -35,13 +35,16 @@ public class ClientHandler implements Runnable {
                 // Read in the first line of request
                 String request = bufferedReader.readLine();
 
+                // increase clock
+                AggregationServer.tick();
+
                 // Check if the request is GET or PUT
                 if (request != null && request.split(" ")[0].equals("GET")) {
                     // validate the header
                     if (request.matches("GET /weather(/[a-zA-Z0-9]*)? .*")) {
                         ParseGETRequest(request+"\n");
                     } else {
-                        SendMessage("Error 400 Bad request\n");
+                        SendMessage("HTTP/1.1 400 Bad Request\r\n","");
                         CloseConnection();
                     }
                 } else if (request != null && request.split(" ")[0].equals("PUT")) {
@@ -49,11 +52,11 @@ public class ClientHandler implements Runnable {
                     if (request.matches("PUT /weather.json .*")) {
                         ParsePUTRequest(request+"\n");
                     } else {
-                        SendMessage("Error 400 Bad request\n");
+                        SendMessage("HTTP/1.1 400 Bad Request\r\n","");
                         CloseConnection();
                     }
                 } else {
-                    SendMessage("Error 400 Bad request\n");
+                    SendMessage("HTTP/1.1 400 Bad Request\r\n","");
                 }
             } catch (IOException e){
                 CloseConnection();
@@ -78,9 +81,9 @@ public class ClientHandler implements Runnable {
 
             // Check for empty requests
             if (new_data.isEmpty() || new_data.equals("[]")) {
-                SendMessage("204: no content\n");
+                SendMessage("HTTP/1.1 204 No Content\r\n", "");
             } else {
-                SendMessage("HTTP/1.1 200 OK\r\n");
+                SendMessage("HTTP/1.1 200 OK\r\n","");
                 // Update the weather using the new data
                 UpdateWeather(new_data);
             }          
@@ -103,28 +106,21 @@ public class ClientHandler implements Runnable {
 
             // Get the station ID from request
             String[] parts = request.split(" ")[1].split("/");
-            String payload = "";
+            String body = "";
             if (parts.length > 2) { // If it is /weather/stationID
                 // find the station's entry
                 WeatherEntry result = AggregationServer.database.get(parts[2]);
                 if (result != null) {
-                    payload = Parser.Obj2JSON(result);
+                    body = Parser.Obj2JSON(result);
                 }
-                
-                SendMessage("HTTP/1.1 200 OK\r\n" +
-                "Content-Type: json\r\n" +
-                "\r\n" + "[\n"+payload +"\n]\n");
-                CloseConnection();
             } else {
                 // send all weather data
-                payload = this.Parser.dump(AggregationServer.database);
-                SendMessage("HTTP/1.1 200 OK\r\n" +
-                "Content-Type: json\r\n" +
-                "\r\n" + payload + "\n");
-                CloseConnection();
+                body = this.Parser.dump(AggregationServer.database);
             }
+            String header = "HTTP/1.1 200 OK\r\n" + "Content-Type: json\r\n";          
+            SendMessage(header, body);
+            CloseConnection();
         } catch (IOException e) {
-            e.printStackTrace();
             CloseConnection();
         }    
     }
@@ -141,14 +137,23 @@ public class ClientHandler implements Runnable {
             } 
         } catch (Exception e) {
             // Incorrect JSON format
-            SendMessage("Error 500 internal server error");
+            SendMessage("HTTP/1.1 500 Internal Server Error\r\n","");
         }   
     }
 
-    public void SendMessage(String msg) {
+    public void SendMessage(String header, String body) {
+        // Everytime the Aggregation server sends a message, it increase its clock and send the time with the message.
+        AggregationServer.tick();
+        header = header + "Lamport Time: " + AggregationServer.LamportClock+"\r\n";
+
+        // if there is a body, add line break and square brackets.
+        if (!body.isEmpty()) {
+            body = "\r\n[\n" + body + "\n]";
+        }
+        
         if (client_soc.isConnected()) {
             try {
-                this.bufferedWriter.write(msg);
+                this.bufferedWriter.write(header + body);
                 this.bufferedWriter.newLine();
                 this.bufferedWriter.flush();
             } catch (IOException e){

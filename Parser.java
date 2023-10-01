@@ -132,7 +132,7 @@ public class Parser {
         }
     }
 
-    // This function opens a txt file and convert its content to JSON format, providing it's valid. otherwise return empty string.
+    // plain string in txt file ==> JSON string. Return empty string if fail to convert.
     public String txt2JSON(String FilePath) {
         String JSON_str = "";
         try (BufferedReader reader = new BufferedReader(new FileReader(FilePath))) {
@@ -157,7 +157,7 @@ public class Parser {
                 JSON_str = JSON_str + JSON_entry;
             }
 
-            JSON_str = "[\n" + JSON_str.trim() + "\n]";
+            JSON_str = JSON_str.trim();
             return JSON_str;
         } catch (IOException e) {
             return "";

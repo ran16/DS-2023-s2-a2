@@ -6,10 +6,9 @@ import java.util.Set;
 
 public class AggregationServer {
     private ServerSocket serverSocket;
-
     public static HashMap<String, WeatherEntry> database = new HashMap<>(); // used to store weather data. key is the station ID and the value is the corresponding weatherentry object
     private static HashMap<String, Set<String>> AliveContentServers = new HashMap<>(); // used to keep track of content servers and station IDs reported by each server
-    private static int LamportClock = 0;
+    public static int LamportClock = 0;
 
     // constructor
     public AggregationServer(ServerSocket serverSocket) {
@@ -48,6 +47,12 @@ public class AggregationServer {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    // This function increase the lamport clock by 1
+    // Events that trigger clock are: recieving messages, sending messages.
+    public synchronized static void tick() {
+        LamportClock++;
     }
 
     public static void main(String[] args) throws IOException{
