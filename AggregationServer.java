@@ -51,7 +51,8 @@ public class AggregationServer {
 
     // This function increase the lamport clock by 1
     // Events that trigger clock are: recieving messages, sending messages.
-    public synchronized static void tick() {
+    public synchronized static void UpdateClock(int recieved_time) {
+        LamportClock  = (recieved_time > LamportClock ) ? recieved_time : LamportClock ;
         LamportClock++;
     }
 

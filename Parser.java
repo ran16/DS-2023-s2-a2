@@ -80,7 +80,6 @@ public class Parser {
                 str += "\n";
             }
         }
-        // strip brackets
         return str;
     }
 
@@ -157,7 +156,7 @@ public class Parser {
                 JSON_str = JSON_str + JSON_entry;
             }
 
-            JSON_str = JSON_str.trim();
+            JSON_str = "[\n" + JSON_str.trim() + "\n]";
             return JSON_str;
         } catch (IOException e) {
             return "";
@@ -165,7 +164,6 @@ public class Parser {
     }
 
     public int GetResponseCode(String response) {
-        System.out.println(response);
         try {
             String[] parts = response.split(" ");
             return Integer.parseInt(parts[1]);
@@ -209,9 +207,10 @@ public class Parser {
     // WeatherEntry object ==> JSON string 
     public String Obj2JSON(WeatherEntry obj) {
         if (obj == null) {
-            System.out.println("quack!");
+            return "";
+        } else {
+            return gson.toJson(obj);
         }
-        return gson.toJson(obj);
     }
 
     public String dump(HashMap<String, WeatherEntry> database) {

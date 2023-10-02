@@ -12,6 +12,7 @@ public class GETClient {
     private BufferedWriter bufferedWriter;
     private Parser Parser; // create a Parser for string <-> JSON
     private int LamportClock;
+    private Clock clock;
     
 
     // This function creates a client object
@@ -23,6 +24,7 @@ public class GETClient {
         try {
             this.my_soc = socket;
             this.Parser = new Parser();
+            this.clock = new Clock();
             // Turn the socket's byte stream into char stream, and wrap it in a buffer for both read and write.
             this.bufferedReader = new BufferedReader(new InputStreamReader(my_soc.getInputStream()));
             this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(my_soc.getOutputStream()));
@@ -52,8 +54,8 @@ public class GETClient {
     // This function sends a GET request to the Aggregation server to recieve the latest weather data
     public String GetWeather(String dest, String stationID) {
         // send a GET request to get weather data
-        String msg = "GET /weather" + stationID + " HTTP/1.1\nHost:" + dest+"\n";
-        SendMessage(dest,msg);
+        String header = "GET /weather" + stationID + " HTTP/1.1\nHost:" + dest+"\n";
+        SendMessage(header,"");
 
         // Recieve the response
         try {
@@ -75,23 +77,32 @@ public class GETClient {
     }
 
     // This function prints the weather from the response
-    public void PrintWeather(String data) {
-        String weather = Parser.JSON2String(data);
-        if (weather.isEmpty()) {
+    public void PrintWeather(String json_str) {
+        String plain_str = Parser.JSON2String(json_str);
+        if (plain_str.isEmpty()) {
             System.out.println("Sorry, weather data cannot be found for this station.");
         } else {
-            System.out.println(weather);
+            System.out.println(plain_str);
         }
     }
 
-    public void SendMessage(String dest, String msg) {
+    public void SendMessage(String header, String body) {
+        // Everytime the Content server sends a message, it increase its clock and send the time with the message.
+        this.LamportClock++;
+        header = header + "Lamport Time: " + this.LamportClock + "\r\n";
+
+        // if there is a body, add line break.
+        if (!body.isEmpty()) {
+            body = "\r\n" + body;
+        }
+
         if (this.my_soc.isConnected()) {
             try {
-                this.bufferedWriter.write(msg);
+                this.bufferedWriter.write(header + body);
                 this.bufferedWriter.newLine();
                 this.bufferedWriter.flush();
             }  catch (Exception e) {
-                System.out.println("Something went wrong. Client disconnected.");
+                System.out.println("Something went wrong. The server has disconnected.");
                 this.CloseConnection();
             }
         }
@@ -120,7 +131,7 @@ public class GETClient {
         try{
             Socket socket = new Socket(host, port);
             GETClient client = new GETClient(socket);
-            System.out.println("Client is connected");
+            System.out.println("Client is connected\n\n");
 
             // Get station ID if there is one
             String stationID = "";
@@ -130,6 +141,11 @@ public class GETClient {
 
             // Send GET request
             String response = client.GetWeather(url.toString(), stationID);
+
+            // Update clock
+            Integer recieved_time = client.clock.GetRecievedTime(response);
+            client.LamportClock  = (recieved_time > client.LamportClock ) ? recieved_time : client.LamportClock ;
+
             try {
                 int respons_code = client.Parser.GetResponseCode(response);
                 if (respons_code == 200) {

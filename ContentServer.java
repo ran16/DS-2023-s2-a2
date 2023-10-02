@@ -5,8 +5,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.net.URL;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 
 public class ContentServer {
@@ -16,13 +14,16 @@ public class ContentServer {
     private Parser Parser;
     private String FilePath;
     private String ContentServerID;
-    private static int LamportClock = 0;
+    private int LamportClock;
+    private Clock clock; // the Clock library
 
     // This function creates a client object
     public ContentServer(Socket socket) {
         try {
             this.my_soc = socket;
             this.Parser = new Parser();
+            this.LamportClock = 0;
+            this.clock = new Clock();
             // Turn the socket's byte stream into char stream, and wrap it in a buffer for both read and write.
             this.bufferedReader = new BufferedReader(new InputStreamReader(my_soc.getInputStream()));
             this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(my_soc.getOutputStream()));
@@ -63,14 +64,17 @@ public class ContentServer {
         try {
             String response = "";
             String line = this.bufferedReader.readLine();
+
             while (line != null && !line.isEmpty()) {
                 response = response + line + "\n";
                 line = bufferedReader.readLine();
             }
 
             // update clock
-            int response_time = GetResponseTime(response);
-            ContentServer.LamportClock = (response_time > ContentServer.LamportClock) ? response_time : ContentServer.LamportClock;
+            int recieved_time = clock.GetRecievedTime(response);
+            this.LamportClock  = (recieved_time > this.LamportClock ) ? recieved_time : this.LamportClock ;
+            this.LamportClock++;
+
             return response;
         } catch (Exception e) {
             this.CloseConnection();
@@ -78,49 +82,14 @@ public class ContentServer {
         }
     }
 
-    // This function extracts Lamport time from the response recieved.
-    public int GetResponseTime(String response) {
-        // Define the regular expression pattern to match "Lamport Time: <number>"
-        String regex = "Lamport Time: (\\d+)";
-        Pattern pattern = Pattern.compile(regex);
-
-        // Use a Matcher to find the pattern in the input string
-        Matcher matcher = pattern.matcher(response);
-
-        // Check if the pattern was found
-        if (matcher.find()) {
-            // Extract the number from the matched group
-            String numberStr = matcher.group(1);
-
-            // Parse the number as an integer and return it
-            try {
-                return Integer.parseInt(numberStr);
-            } catch (NumberFormatException e) {
-                System.out.println("Time Sync failed. Invalid Lamport Time format: " + numberStr);
-                return -1;
-            }
-        } else {
-            // Handle the case where the pattern was not found
-            System.out.println("Time Sync failed. Please reconnect.");
-            CloseConnection();
-            return -1;
-        }
-    }
-
-    // This function increase the lamport clock by 1
-    // Events that trigger clock are: recieving messages, sending messages.
-    public synchronized static void tick() {
-        LamportClock++;
-    }
-
     public void SendMessage(String header, String body) {
         // Everytime the Content server sends a message, it increase its clock and send the time with the message.
-        ContentServer.tick();
-        header = header + "Lamport Time: " + AggregationServer.LamportClock + "\r\n";
+        this.LamportClock++;
+        header = header + "Lamport Time: " + this.LamportClock + "\r\n";
 
-        // if there is a body, add line break and square brackets.
+        // if there is a body, add line break.
         if (!body.isEmpty()) {
-            body = "\r\n[\n" + body + "\n]";
+            body = "\r\n" + body;
         }
 
         if (this.my_soc.isConnected()) {

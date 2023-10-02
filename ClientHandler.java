@@ -10,6 +10,7 @@ public class ClientHandler implements Runnable {
     private BufferedReader bufferedReader;
     private BufferedWriter bufferedWriter;
     private Parser Parser; // create a Parser for string <-> JSON
+    private Clock clock; // the Clock library
 
     // Constructor
     public ClientHandler(Socket socket) {
@@ -17,6 +18,7 @@ public class ClientHandler implements Runnable {
             // This is the client socket
             this.client_soc = socket;
             this.Parser = new Parser();
+            this.clock = new Clock();
 
             // Turn the socket's byte stream into char stream, and wrap it in a buffer for both read and write.
             this.bufferedReader = new BufferedReader(new InputStreamReader(client_soc.getInputStream()));
@@ -34,9 +36,6 @@ public class ClientHandler implements Runnable {
             try {
                 // Read in the first line of request
                 String request = bufferedReader.readLine();
-
-                // increase clock
-                AggregationServer.tick();
 
                 // Check if the request is GET or PUT
                 if (request != null && request.split(" ")[0].equals("GET")) {
@@ -76,6 +75,10 @@ public class ClientHandler implements Runnable {
             }
             request = request + line + "\n";
 
+            // Get timestamp from request
+            int recieved_time = clock.GetRecievedTime(request);
+            AggregationServer.UpdateClock(recieved_time);
+
             // Get the data in the body of the PUT request
             String new_data = Parser.extractBody(request);
 
@@ -104,14 +107,20 @@ public class ClientHandler implements Runnable {
             request = request + line + "\n";
             System.out.println("quack: --------------\n"+request+"------------");
 
+            // Get timestamp from request
+            int recieved_time = clock.GetRecievedTime(request);
+            AggregationServer.UpdateClock(recieved_time);
+
             // Get the station ID from request
             String[] parts = request.split(" ")[1].split("/");
+
+            // return data
             String body = "";
             if (parts.length > 2) { // If it is /weather/stationID
                 // find the station's entry
                 WeatherEntry result = AggregationServer.database.get(parts[2]);
                 if (result != null) {
-                    body = Parser.Obj2JSON(result);
+                    body = "[\n" + Parser.Obj2JSON(result) + "\n]";
                 }
             } else {
                 // send all weather data
@@ -143,12 +152,12 @@ public class ClientHandler implements Runnable {
 
     public void SendMessage(String header, String body) {
         // Everytime the Aggregation server sends a message, it increase its clock and send the time with the message.
-        AggregationServer.tick();
+        AggregationServer.LamportClock++;
         header = header + "Lamport Time: " + AggregationServer.LamportClock+"\r\n";
 
-        // if there is a body, add line break and square brackets.
+        // if there is a body, add line break .
         if (!body.isEmpty()) {
-            body = "\r\n[\n" + body + "\n]";
+            body = "\r\n" + body;
         }
         
         if (client_soc.isConnected()) {
