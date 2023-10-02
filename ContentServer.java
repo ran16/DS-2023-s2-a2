@@ -49,15 +49,43 @@ public class ContentServer {
             e.printStackTrace();
         }
     }
+
+    public void SyncTime() {
+        // send a GET request to get weather data
+        String header = "GET /time HTTP/1.1\r\n";
+        SendMessage(header,"");
+
+        // Recieve the response
+        try {
+            String response = "";
+            String line = this.bufferedReader.readLine();
+
+            while (line != null && !line.isEmpty()) {
+                response = response + line + "\n";
+                line = bufferedReader.readLine();
+            }
+
+            // update clock
+            int recieved_time = clock.GetRecievedTime(response);
+            this.LamportClock  = (recieved_time > this.LamportClock ) ? recieved_time : this.LamportClock ;
+            this.LamportClock++;
+        } catch (Exception e) {
+            System.out.println("Cannot sync time with server. Closing connection.");
+            this.CloseConnection();
+        }
+    }
     
     // This function sends a PUT request to the Aggregation server to update the latest weather data
-    public String UpdateWeather(String dest) {
+    public String UpdateWeather() {
         // send a GET request to get weather data
         String body = this.Parser.txt2JSON(this.FilePath);
         String header = "PUT /weather.json HTTP/1.1\r\n" +
             "User-Agent: ATOMClient/1/0c\r\n" +
             "Content-Type: json\r\n" +
             "Content-Length: " + body.getBytes().length + "\r\n";
+        
+            // Sync time with the Aggregation server before sending weather update.
+        SyncTime();
         SendMessage(header,body);
 
         // Recieve the response
@@ -136,8 +164,8 @@ public class ContentServer {
             int i=0;
             // if the socket has been connected, and the close method has not been called.
             while (cs.my_soc.isConnected() && !cs.my_soc.isClosed()) {
-                System.out.println("Still connected. \nSending weather update "+i+"...\n");
-                String response = cs.UpdateWeather(url.toString());
+                System.out.println("Sending weather update "+i+"...\nTime = " + cs.LamportClock+"\n\n");
+                String response = cs.UpdateWeather();
                 int respons_code = cs.Parser.GetResponseCode(response);
 
                 // If success, sleep for 10 seconds and update a gain. Otherwise update immediately.

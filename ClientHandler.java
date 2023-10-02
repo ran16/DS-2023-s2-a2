@@ -38,22 +38,13 @@ public class ClientHandler implements Runnable {
                 String request = bufferedReader.readLine();
 
                 // Check if the request is GET or PUT
-                if (request != null && request.split(" ")[0].equals("GET")) {
-                    // validate the header
-                    if (request.matches("GET /weather(/[a-zA-Z0-9]*)? .*")) {
-                        ParseGETRequest(request+"\n");
-                    } else {
-                        SendMessage("HTTP/1.1 400 Bad Request\r\n","");
-                        CloseConnection();
-                    }
-                } else if (request != null && request.split(" ")[0].equals("PUT")) {
-                    // validate the header
-                    if (request.matches("PUT /weather.json .*")) {
-                        ParsePUTRequest(request+"\n");
-                    } else {
-                        SendMessage("HTTP/1.1 400 Bad Request\r\n","");
-                        CloseConnection();
-                    }
+                if (request != null && request.matches("GET /weather(/[a-zA-Z0-9]*)? .*")) {
+                    ParseGETRequest(request+"\n");
+                } else if (request != null && request.matches("PUT /weather.json .*")) {
+                    ParsePUTRequest(request+"\n");
+                } else if (request != null && request.matches("GET /time .*")) {
+                    System.out.println("sync time... reqeust");
+                    ParseGETTimeRequest(request+"\n");
                 } else {
                     SendMessage("HTTP/1.1 400 Bad Request\r\n","");
                 }
@@ -77,6 +68,9 @@ public class ClientHandler implements Runnable {
 
             // Get timestamp from request
             int recieved_time = clock.GetRecievedTime(request);
+            // Make a copy of the old time
+            int old_time = AggregationServer.LamportClock;
+            // Update clock
             AggregationServer.UpdateClock(recieved_time);
 
             // Get the data in the body of the PUT request
@@ -88,7 +82,12 @@ public class ClientHandler implements Runnable {
             } else {
                 SendMessage("HTTP/1.1 200 OK\r\n","");
                 // Update the weather using the new data
-                UpdateWeather(new_data);
+                if (old_time < recieved_time) {
+                    System.out.println(old_time + " < " + recieved_time+ " ==> update weather!");
+                    UpdateWeather(new_data);
+                } else {
+                    System.out.println(old_time + " > " + recieved_time+ " ==> no no no updating");
+                }
             }          
         } catch (IOException e) {
             CloseConnection();
@@ -129,6 +128,31 @@ public class ClientHandler implements Runnable {
             String header = "HTTP/1.1 200 OK\r\n" + "Content-Type: json\r\n";          
             SendMessage(header, body);
             CloseConnection();
+        } catch (IOException e) {
+            CloseConnection();
+        }    
+    }
+
+    // This function parses GET time request and respond with server's lamport time.
+    public void ParseGETTimeRequest(String request) {
+        try {
+            // Read till empty line
+            String line = bufferedReader.readLine();
+            while (line != null && !line.isEmpty()) {
+                request = request + line + "\n";
+                line = bufferedReader.readLine();
+            }
+            request = request + line + "\n";
+            System.out.println("Incoming request: --------------\n"+request+"------------");
+
+            // Get timestamp from request
+            int recieved_time = clock.GetRecievedTime(request);
+            AggregationServer.UpdateClock(recieved_time);
+
+            // return data
+            String body = "";
+            String header = "HTTP/1.1 200 OK\r\n" + "Content-Type: txt\r\n";          
+            SendMessage(header, body);
         } catch (IOException e) {
             CloseConnection();
         }    
