@@ -169,10 +169,10 @@ public class ContentServer {
                 int respons_code = cs.Parser.GetResponseCode(response);
 
                 // If success, sleep for 10 seconds and update a gain. Otherwise update immediately.
-                if ( respons_code == 200) {
+                if ( respons_code >= 200 && respons_code < 300) {
                     i++;
                     Thread.sleep(10000);
-                } // else response_code == 201, else 4xx try again, else xxx for empty content
+                } 
             }
             
         } catch (IOException e) {
