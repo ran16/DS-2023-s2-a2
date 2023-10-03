@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class ClientHandler implements Runnable {
     private Socket client_soc;
@@ -11,6 +13,8 @@ public class ClientHandler implements Runnable {
     private BufferedWriter bufferedWriter;
     private Parser Parser; // create a Parser for string <-> JSON
     private Clock clock; // the Clock library
+    private int sessionID; // to keep track of clients, especially content servers.
+    private Timer timer; // Used to time content server acitivity
 
     // Constructor
     public ClientHandler(Socket socket) {
@@ -19,6 +23,12 @@ public class ClientHandler implements Runnable {
             this.client_soc = socket;
             this.Parser = new Parser();
             this.clock = new Clock();
+            this.sessionID = AggregationServer.sessionID;
+            AggregationServer.sessionID++;
+
+            // Create a timer to close the connection after 30 seconds of inactivity
+            this.timer = new Timer();
+            timer.schedule(new CloseConnectionTask(client_soc, sessionID), 30000);
 
             // Turn the socket's byte stream into char stream, and wrap it in a buffer for both read and write.
             this.bufferedReader = new BufferedReader(new InputStreamReader(client_soc.getInputStream()));
@@ -48,6 +58,12 @@ public class ClientHandler implements Runnable {
                 } else {
                     SendMessage("HTTP/1.1 400 Bad Request\r\n","");
                 }
+
+                // Reset the timer upon receiving a message
+                timer.cancel();
+                timer.purge();
+                timer = new Timer();
+                timer.schedule(new CloseConnectionTask(client_soc, sessionID), 30000);
             } catch (IOException e){
                 CloseConnection();
                 break;
@@ -55,6 +71,39 @@ public class ClientHandler implements Runnable {
         } 
     }
 
+    // Define the action when timeout happens
+    private static class CloseConnectionTask extends TimerTask {
+        private final Socket clientSocket;
+        private final int sessionID;
+
+        CloseConnectionTask(Socket clientSocket, int sessionID) {
+            this.clientSocket = clientSocket;
+            this.sessionID = sessionID;
+        }
+
+        @Override
+        public void run() {
+            // Close the client connection due to inactivity
+            try {
+                System.out.println("Closing connection to Content Server " + sessionID + " due to inactivity.");
+                if (clientSocket != null) {
+                    // InputStream inputStream = clientSocket.getInputStream();
+                    // OutputStream outputStream = clientSocket.getOutputStream();
+
+                    // if (inputStream != null) {
+                    //     inputStream.close();
+                    // }
+                    // if (outputStream != null) {
+                    //     outputStream.close();
+                    // } 
+                    clientSocket.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+    
     // This function parses PUT request and send response accordingly
     public void ParsePUTRequest(String request) {
         try {

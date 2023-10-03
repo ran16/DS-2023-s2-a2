@@ -13,7 +13,6 @@ public class ContentServer {
     private BufferedWriter bufferedWriter;
     private Parser Parser;
     private String FilePath;
-    private String ContentServerID;
     private int LamportClock;
     private Clock clock; // the Clock library
 
@@ -24,6 +23,7 @@ public class ContentServer {
             this.Parser = new Parser();
             this.LamportClock = 0;
             this.clock = new Clock();
+
             // Turn the socket's byte stream into char stream, and wrap it in a buffer for both read and write.
             this.bufferedReader = new BufferedReader(new InputStreamReader(my_soc.getInputStream()));
             this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(my_soc.getOutputStream()));
@@ -87,6 +87,8 @@ public class ContentServer {
             // Sync time with the Aggregation server before sending weather update.
         SyncTime();
         SendMessage(header,body);
+
+        System.out.println("Time = " + this.LamportClock+"\n\n");
 
         // Recieve the response
         try {
@@ -161,20 +163,19 @@ public class ContentServer {
             cs.FilePath = args[1];
 
             // Send PUT request
-            int i=0;
+            int number_of_updates=0;
             // if the socket has been connected, and the close method has not been called.
-            while (cs.my_soc.isConnected() && !cs.my_soc.isClosed()) {
-                System.out.println("Sending weather update "+i+"...\nTime = " + cs.LamportClock+"\n\n");
+            while (cs.my_soc.isConnected() && !cs.my_soc.isClosed() && number_of_updates < 2) {
+                System.out.println("Sending weather update "+ number_of_updates +"...");
                 String response = cs.UpdateWeather();
                 int respons_code = cs.Parser.GetResponseCode(response);
 
-                // If success, sleep for 10 seconds and update a gain. Otherwise update immediately.
+                // If success, sleep for 10 seconds and update again. Otherwise update immediately.
                 if ( respons_code >= 200 && respons_code < 300) {
-                    i++;
+                    number_of_updates++;
                     Thread.sleep(10000);
                 } 
             }
-            
         } catch (IOException e) {
             System.out.println("failed to connect to server. Please check the host and port");
             return;

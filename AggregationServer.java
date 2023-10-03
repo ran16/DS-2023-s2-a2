@@ -9,12 +9,56 @@ public class AggregationServer {
     public static HashMap<String, WeatherEntry> database = new HashMap<>(); // used to store weather data. key is the station ID and the value is the corresponding weatherentry object
     private static HashMap<String, Set<String>> AliveContentServers = new HashMap<>(); // used to keep track of content servers and station IDs reported by each server
     public static int LamportClock = 0;
+    public static int sessionID = 0; // Used to keep track of content servers.
 
     // constructor
     public AggregationServer(ServerSocket serverSocket) {
         this.serverSocket = serverSocket;
     }
 
+    // This function increase the lamport clock by 1
+    // Events that trigger clock are: recieving messages, sending messages.
+    public synchronized static void UpdateClock(int recieved_time) {
+        LamportClock  = (recieved_time > LamportClock ) ? recieved_time : LamportClock ;
+        LamportClock++;
+    }
+
+    // Isssue session ID to client, and increase sessionID by 1.
+    public synchronized static int GetSessionID(){
+        int sid = sessionID;
+        
+        // increase session ID by 1
+        sessionID++;
+
+        // Issue the session ID to client
+        return sid;
+    }
+
+    public static void main(String[] args) throws IOException{
+        // Get port number from command line argument
+        int port_number = 4567;
+        if (args.length > 0) {
+            try {
+                port_number = Integer.parseInt(args[0]);
+            } catch (Exception e){
+                port_number = 4567; // the argument is an invalid port number -- default to 4567
+            }
+        }
+
+        // Create a server socket
+        ServerSocket serverSocket = null;
+        // Use try-catch to prevent failing to start because the port is not available.
+        try {
+            serverSocket = new ServerSocket(port_number);
+        } catch(Exception e) {
+            serverSocket = new ServerSocket(4567);
+        }
+
+        // Starts the server
+        AggregationServer server = new AggregationServer(serverSocket);
+        server.StartServer();
+    }
+    
     // This function starts the server.
     public void StartServer() {
         try {
@@ -47,39 +91,5 @@ public class AggregationServer {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    // This function increase the lamport clock by 1
-    // Events that trigger clock are: recieving messages, sending messages.
-    public synchronized static void UpdateClock(int recieved_time) {
-        LamportClock  = (recieved_time > LamportClock ) ? recieved_time : LamportClock ;
-        LamportClock++;
-    }
-
-    public static void main(String[] args) throws IOException{
-        // Get port number from command line argument
-        int port_number = 4567;
-        if (args.length > 0) {
-            try {
-                port_number = Integer.parseInt(args[0]);
-            } catch (Exception e){
-                port_number = 4567; // the argument is an invalid port number -- default to 4567
-            }
-        }
-
-        // Create a server socket
-        ServerSocket serverSocket = null;
-        // Use try-catch to prevent failing to start because the port is not available.
-        try {
-            serverSocket = new ServerSocket(port_number);
-        } catch(Exception e) {
-            serverSocket = new ServerSocket(4567);
-        }
-
-        // Starts the server
-        AggregationServer server = new AggregationServer(serverSocket);
-        server.StartServer();
-
-
     }
 }
