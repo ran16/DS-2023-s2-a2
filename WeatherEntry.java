@@ -1,7 +1,11 @@
+import com.google.gson.annotations.Expose;
+
 public class WeatherEntry {
-    
-    private String id;    
-    private String name;    
+    @Expose 
+    private String id; // this is the station ID 
+    @Expose    
+    private String name;
+    @Expose     
     private String state;    
     private String time_zone;    
     private double lat;    
@@ -17,8 +21,18 @@ public class WeatherEntry {
     private String wind_dir;    
     private int wind_spd_kmh;    
     private int wind_spd_kt;
+    
+    private int sourceID = -1; // the ID of the content server that sent this data.
 
-    public String getID() {
+    public String getStationID() {
         return id;
+    }
+
+    public int getSourceID() {
+        return sourceID;
+    }
+
+    public void addSourceID(int id) {
+        this.sourceID = id;
     }
 }

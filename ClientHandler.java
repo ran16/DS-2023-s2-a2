@@ -205,8 +205,10 @@ public class ClientHandler implements Runnable {
 
             // update the data
             for (WeatherEntry entry:entries) {
+                // Add the session ID to the entry as sourceID.
+                entry.addSourceID(this.sessionID);
                 // update in database
-                AggregationServer.database.put(entry.getID(), entry);
+                AggregationServer.database.put(entry.getStationID(), entry);
             }
 
             // send OK
