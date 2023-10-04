@@ -87,15 +87,6 @@ public class ClientHandler implements Runnable {
             try {
                 System.out.println("Closing connection to Content Server " + sessionID + " due to inactivity.");
                 if (clientSocket != null) {
-                    // InputStream inputStream = clientSocket.getInputStream();
-                    // OutputStream outputStream = clientSocket.getOutputStream();
-
-                    // if (inputStream != null) {
-                    //     inputStream.close();
-                    // }
-                    // if (outputStream != null) {
-                    //     outputStream.close();
-                    // } 
                     clientSocket.close();
                 }
             } catch (IOException e) {
@@ -129,7 +120,6 @@ public class ClientHandler implements Runnable {
             if (new_data.isEmpty() || new_data.equals("[]")) {
                 SendMessage("HTTP/1.1 204 No Content\r\n", "");
             } else {
-                SendMessage("HTTP/1.1 200 OK\r\n","");
                 // Update the weather using the new data
                 if (old_time < recieved_time) {
                     System.out.println(old_time + " < " + recieved_time+ " ==> update weather!");
@@ -213,10 +203,14 @@ public class ClientHandler implements Runnable {
         try {
             WeatherEntry[] entries = Parser.JSON2Obj(new_data);
 
+            // update the data
             for (WeatherEntry entry:entries) {
                 // update in database
                 AggregationServer.database.put(entry.getID(), entry);
-            } 
+            }
+
+            // send OK
+            SendMessage("HTTP/1.1 200 OK\r\n","");
         } catch (Exception e) {
             // Incorrect JSON format
             SendMessage("HTTP/1.1 500 Internal Server Error\r\n","");

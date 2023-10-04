@@ -165,7 +165,7 @@ public class ContentServer {
             // Send PUT request
             int number_of_updates=0;
             // if the socket has been connected, and the close method has not been called.
-            while (cs.my_soc.isConnected() && !cs.my_soc.isClosed() && number_of_updates < 2) {
+            while (cs.my_soc.isConnected() && !cs.my_soc.isClosed()) {
                 System.out.println("Sending weather update "+ number_of_updates +"...");
                 String response = cs.UpdateWeather();
                 int respons_code = cs.Parser.GetResponseCode(response);
