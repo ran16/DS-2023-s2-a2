@@ -105,36 +105,39 @@ public class AggregationServer {
     public void StartServer() {
         System.out.println("Starting aggregation server ...");
         
-        // Load database from backup file
-        System.out.println("Loading database from backup file ...");
-        // plain string ==> json string
-        String json_data = parser.readFile("weather_backup.txt");
-        System.out.println(json_data);
-        // json string ==> Weather Objects array
-        WeatherEntry[] weatherEtries = parser.JSON2Obj(json_data);
-        // Weather objects arry ==> hashmap
-        for (WeatherEntry entry : weatherEtries) {
-            database.put(entry.getStationID(), entry);
-        }
-
-        // Connect to clients
         try {
-            System.out.println("The aggregation server has started.");
+            System.out.println("Loading database from backup file ...");
+            String[] backup = parser.readBackupFile("weather_backup.txt");
+            // Load lamport clock from backup file
+            LamportClock = Integer.valueOf(backup[0]);
             
-            // Keep listening for connection requests
-            while (!serverSocket.isClosed()) {
-                // Blocks till a connection request comes through
-                Socket client_soc = serverSocket.accept();        
-
-                // Create a client handler to handler the client request
-                ClientHandler clientHandler = new ClientHandler(client_soc);
-
-                // Spawn a new thread to handler the client request
-                Thread thread = new Thread(clientHandler);
-                thread.start();
+            // Load data from backup file.
+            WeatherEntry[] weatherEtries = parser.JSON2Obj(backup[1]);
+            for (WeatherEntry entry : weatherEtries) {
+                database.put(entry.getStationID(), entry);
             }
-        } catch (IOException e) {
-            CloseServerSocket();
+
+            // Connect to clients
+            try {
+                System.out.println("The aggregation server has started.");
+                
+                // Keep listening for connection requests
+                while (!serverSocket.isClosed()) {
+                    // Blocks till a connection request comes through
+                    Socket client_soc = serverSocket.accept();        
+
+                    // Create a client handler to handler the client request
+                    ClientHandler clientHandler = new ClientHandler(client_soc);
+
+                    // Spawn a new thread to handler the client request
+                    Thread thread = new Thread(clientHandler);
+                    thread.start();
+                }
+            } catch (IOException e) {
+                CloseServerSocket();
+            }
+        } catch (Exception e) {
+            System.out.println("Failed to load data from backup file.");
         }
     }
 

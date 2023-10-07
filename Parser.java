@@ -87,17 +87,23 @@ public class Parser {
         return str;
     }
 
-
-
-    // This function opens a txt file and reads line by line, concatenate the lines and return a big string.
-    public String readFile(String FilePath) {
-        String str = "";
+    // This function returns the content of the backup file in json format string
+    //  content[0] is the lamport clock
+    //  content[1] is all the json data as one big string
+    public String[] readBackupFile(String FilePath) {
+        String[] content = new String[2];
         try (BufferedReader reader = new BufferedReader(new FileReader(FilePath))) {
+            // Save the first line (lamport clock)
+            content[0] = reader.readLine();
+
+            // Read the rest line by line
+            String str = "";
             String line;
             while ((line = reader.readLine()) != null) {
                 str = str + line + "\r\n";
             }
-            return str;
+            content[1] = str;
+            return content;
         } catch (IOException e) {
             return null;
         }
@@ -258,10 +264,12 @@ public class Parser {
             list.add(value);
         }
 
+        // Write the lamport clock to backup file.
+        String data = Integer.toString(LamportClock) + "\r\n";
+        
         // Convert the list of weather data to JSON
-        String json_data = "";
         try {
-            json_data = gson.toJson(list);
+            data += gson.toJson(list);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -269,7 +277,7 @@ public class Parser {
         // write to file
         try (FileOutputStream fos = new FileOutputStream(filePath)) {
             // Convert the string to bytes and write to the file
-            byte[] bytes = json_data.getBytes();
+            byte[] bytes = data.getBytes();
             fos.write(bytes);
 
             System.out.println("Data has been written to " + filePath);
