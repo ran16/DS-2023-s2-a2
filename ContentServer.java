@@ -76,7 +76,7 @@ public class ContentServer {
     }
     
     // This function sends a PUT request to the Aggregation server to update the latest weather data
-    public String UpdateWeather() {
+    public String SendWeatherUpdate() {
         // send a GET request to get weather data
         String body = this.Parser.txt2JSON(this.FilePath);
         String header = "PUT /weather.json HTTP/1.1\r\n" +
@@ -167,7 +167,7 @@ public class ContentServer {
             // if the socket has been connected, and the close method has not been called.
             while (cs.my_soc.isConnected() && !cs.my_soc.isClosed()) {
                 System.out.println("Sending weather update "+ number_of_updates +"...");
-                String response = cs.UpdateWeather();
+                String response = cs.SendWeatherUpdate();
                 int respons_code = cs.Parser.GetResponseCode(response);
                 System.out.println("response code = " + Integer.toString(respons_code) +"\n\n");
 

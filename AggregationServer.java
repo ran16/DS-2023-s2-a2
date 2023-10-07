@@ -4,12 +4,10 @@ import java.net.Socket;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 
 public class AggregationServer {
     private ServerSocket serverSocket;
     public static HashMap<String, WeatherEntry> database = new HashMap<>(); // used to store weather data. key is the station ID and the value is the corresponding weatherentry object
-    private static HashMap<String, Set<String>> AliveContentServers = new HashMap<>(); // used to keep track of content servers and station IDs reported by each server
     public static int LamportClock = 0;
     public static int sessionID = 0; // Used to keep track of content servers.
     private static Parser parser = new Parser();;
@@ -49,10 +47,17 @@ public class AggregationServer {
                 // update in database
                 AggregationServer.database.put(entry.getStationID(), entry);
             }
+            
             return true; // success
         } catch (Exception e) {
             return false; // failed due to invalid json format
         }        
+    }
+
+    // This function saves the database to the backup file in json format.
+    public synchronized static void UpdateBackupFile(String FilePath) {
+        // update the backup file
+        parser.dump2File(database, LamportClock, FilePath);
     }
 
 
@@ -98,6 +103,21 @@ public class AggregationServer {
     
     // This function starts the server.
     public void StartServer() {
+        System.out.println("Starting aggregation server ...");
+        
+        // Load database from backup file
+        System.out.println("Loading database from backup file ...");
+        // plain string ==> json string
+        String json_data = parser.readFile("weather_backup.txt");
+        System.out.println(json_data);
+        // json string ==> Weather Objects array
+        WeatherEntry[] weatherEtries = parser.JSON2Obj(json_data);
+        // Weather objects arry ==> hashmap
+        for (WeatherEntry entry : weatherEtries) {
+            database.put(entry.getStationID(), entry);
+        }
+
+        // Connect to clients
         try {
             System.out.println("The aggregation server has started.");
             

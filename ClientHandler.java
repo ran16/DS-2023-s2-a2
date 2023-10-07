@@ -80,7 +80,7 @@ public class ClientHandler implements Runnable {
             public void run() {
                 if (isContentServer) {
                     // Close connection
-                    System.out.println("Closing connection to Content Server " + sessionID + " due to inactivity.");
+                    System.out.println("Closing connection to Content Server (session id = " + sessionID + ") due to inactivity.");
                     try {
                         if (client_soc != null) {
                             client_soc.close();
@@ -91,6 +91,9 @@ public class ClientHandler implements Runnable {
 
                     // Remove old entries
                     AggregationServer.RemoveOldEntries(sessionID);
+                    
+                    // Update the backup file
+                    AggregationServer.UpdateBackupFile("weather_backup.txt");
                 } 
             }
         }, milliseconds);
@@ -132,6 +135,9 @@ public class ClientHandler implements Runnable {
                         } else {
                             SendMessage("HTTP/1.1 200 OK\r\n","");
                         }
+
+                        // Update the backup file
+                        AggregationServer.UpdateBackupFile("weather_backup.txt");
                     } else {
                         // Incorrect JSON format
                         SendMessage("HTTP/1.1 500 Internal Server Error\r\n","");

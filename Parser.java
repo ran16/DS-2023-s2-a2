@@ -1,4 +1,5 @@
 import java.io.BufferedReader;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -12,7 +13,10 @@ import com.google.gson.GsonBuilder;
 
 
 public class Parser {
-    private Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create();
+    // This Gson Builder will hide the "sourceID" attribute when converting object to json
+    private Gson gsonWithExpose = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create();
+    // THis Gson Builder will convert ALL attributes in an object to json
+    private Gson gson= new GsonBuilder().setPrettyPrinting().create();
 
     // plain string ==> JSON string
     public String str2JSON(String str) {
@@ -201,7 +205,7 @@ public class Parser {
 
     // JSON string ==> WeatherEntry object
     public WeatherEntry[] JSON2Obj(String entry) {
-        return gson.fromJson(entry, WeatherEntry[].class);
+        return gsonWithExpose.fromJson(entry, WeatherEntry[].class);
     }
 
     // WeatherEntry object ==> JSON string 
@@ -209,10 +213,11 @@ public class Parser {
         if (obj == null) {
             return "";
         } else {
-            return gson.toJson(obj);
+            return gsonWithExpose.toJson(obj);
         }
     }
 
+    // This function converts the whole database(without the "sourceID" attribute) into json formated string.
     public String dump(HashMap<String, WeatherEntry> database) {
         List<WeatherEntry> list = new ArrayList<>();
         
@@ -230,11 +235,46 @@ public class Parser {
         // Convert the list of weather data to JSON
         String result = "";
         try {
-            result = gson.toJson(list);
+            result = gsonWithExpose.toJson(list);
         } catch (Exception e) {
             e.printStackTrace();
             return "";
         }
         return result;
+    }
+
+    // This function converts the whole database(with the "sourceID" attribute) into json formated string and save to a file
+    public void dump2File(HashMap<String, WeatherEntry> database, int LamportClock, String filePath) {
+        List<WeatherEntry> list = new ArrayList<>();
+        
+        // Create an iterator 
+        Iterator<Map.Entry<String, WeatherEntry>> iterator = database.entrySet().iterator();
+
+        // Iterate through the entries
+        while (iterator.hasNext()) {
+            Map.Entry<String, WeatherEntry> entry = iterator.next();
+            WeatherEntry value = entry.getValue();
+            // append to list
+            list.add(value);
+        }
+
+        // Convert the list of weather data to JSON
+        String json_data = "";
+        try {
+            json_data = gson.toJson(list);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        // write to file
+        try (FileOutputStream fos = new FileOutputStream(filePath)) {
+            // Convert the string to bytes and write to the file
+            byte[] bytes = json_data.getBytes();
+            fos.write(bytes);
+
+            System.out.println("Data has been written to " + filePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
