@@ -1,4 +1,4 @@
-id:IDS60901
+id:IDS01
 name:Adelaide (West Terrace /  ngayirdapira)
 state: SA
 time_zone:CST
@@ -16,7 +16,7 @@ wind_dir:S
 wind_spd_kmh:15
 wind_spd_kt:2
 
-id:IDS20901
+id:IDS05
 name:PlaceA
 state: Test
 time_zone:CST

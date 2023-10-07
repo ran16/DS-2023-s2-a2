@@ -28,8 +28,8 @@ public class ClientHandler implements Runnable {
             AggregationServer.sessionID++;
 
             // Create a timer to close the connection after 30 seconds of inactivity
-            this.timer = new Timer();
-            timer.schedule(new CloseConnectionTask(client_soc, sessionID), 30000);
+            setTimer(30000);
+            
 
             // Turn the socket's byte stream into char stream, and wrap it in a buffer for both read and write.
             this.bufferedReader = new BufferedReader(new InputStreamReader(client_soc.getInputStream()));
@@ -49,10 +49,11 @@ public class ClientHandler implements Runnable {
                 // Read in the first line of request
                 String request = bufferedReader.readLine();
 
-                // Check if the request is GET or PUT
+                // Parse requests by matching the path
                 if (request != null && request.matches("GET /weather(/[a-zA-Z0-9]*)? .*")) {
                     ParseGETRequest(request+"\n");
                 } else if (request != null && request.matches("PUT /weather.json .*")) {
+                    this.isContentServer = true;
                     ParsePUTRequest(request+"\n");
                 } else if (request != null && request.matches("GET /time .*")) {
                     ParseGETTimeRequest(request+"\n");
@@ -63,8 +64,7 @@ public class ClientHandler implements Runnable {
                 // Reset the timer upon receiving a message
                 timer.cancel();
                 timer.purge();
-                timer = new Timer();
-                timer.schedule(new CloseConnectionTask(client_soc, sessionID), 30000);
+                setTimer(30000);
             } catch (IOException e){
                 CloseConnection();
                 break;
@@ -72,30 +72,29 @@ public class ClientHandler implements Runnable {
         } 
     }
 
-    // Define the action when timeout happens
-    private static class CloseConnectionTask extends TimerTask {
-        private final Socket clientSocket;
-        private final int sessionID;
-
-        CloseConnectionTask(Socket clientSocket, int sessionID) {
-            this.clientSocket = clientSocket;
-            this.sessionID = sessionID;
-        }
-
-        @Override
-        public void run() {
-            // Close the client connection due to inactivity
-            try {
-                if (clientSocket != null) {
-                    clientSocket.close();
+    private void setTimer(int milliseconds) {
+        timer = new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                if (isContentServer) {
+                    // Close connection
                     System.out.println("Closing connection to Content Server " + sessionID + " due to inactivity.");
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
+                    try {
+                        if (client_soc != null) {
+                            client_soc.close();
+                        }
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    // Remove old entries
+                    AggregationServer.RemoveOldEntries(sessionID);
+                } 
             }
-        }
+        }, milliseconds);
     }
-    
+
     // This function parses PUT request and send response accordingly
     public void ParsePUTRequest(String request) {
         try {

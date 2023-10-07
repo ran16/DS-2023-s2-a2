@@ -11,14 +11,14 @@ test:
 start:
 	java -cp .:./gson-2.10.1.jar AggregationServer
 
-client:
-	java -cp .:./gson-2.10.1.jar GETClient "http://127.0.0.1:4567"  IDS60901
+client1:
+	java -cp .:./gson-2.10.1.jar GETClient "http://127.0.0.1:4567"  IDS01
 
 client2:
 	java -cp .:./gson-2.10.1.jar GETClient "http://127.0.0.1:4567" 
 
 client3:
-	java -cp .:./gson-2.10.1.jar GETClient "http://127.0.0.1:4567" IDS40903
+	java -cp .:./gson-2.10.1.jar GETClient "http://127.0.0.1:4567" IDS100
 
 content1:
 	java -cp .:./gson-2.10.1.jar ContentServer "http://127.0.0.1:4567" "./weather1.txt"

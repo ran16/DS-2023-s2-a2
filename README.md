@@ -14,3 +14,6 @@ Lamport Clock:
 
 Race condition:
     Race condition may happen when Aggreation Server's multiple threads try to update the database and lamport clock at the same time. To avoid this, I used "synchronized" methods to make sure that only one thread can execute the operation at any given time.
+
+Removing old entries:
+When a content server stop sending messages for over 30 seconds, a time will go off and call the RemoveOldEntries() function. The function takes the disconnected content server's session ID, and look for entries with the same session ID in the database, and remove them.

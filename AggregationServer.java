@@ -2,6 +2,8 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 
 public class AggregationServer {
@@ -32,6 +34,21 @@ public class AggregationServer {
 
         // Issue the session ID to client
         return sid;
+    }
+
+    // Remove all old entries that is logged by contentServerID if it becomes disconnected.
+    public synchronized static void RemoveOldEntries(int contentServerID){
+        // Create an iterator 
+        Iterator<Map.Entry<String, WeatherEntry>> iterator = database.entrySet().iterator();
+
+        // Iterate through the entries
+        while (iterator.hasNext()) {
+            Map.Entry<String, WeatherEntry> entry = iterator.next();
+            if (entry.getValue().getSourceID() == contentServerID) {
+                // Remove entry logged by this server
+                iterator.remove();
+            }
+        }
     }
 
     public static void main(String[] args) throws IOException{
