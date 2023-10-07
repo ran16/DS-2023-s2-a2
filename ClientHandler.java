@@ -16,6 +16,7 @@ public class ClientHandler implements Runnable {
     private int sessionID; // to keep track of clients, especially content servers.
     private Timer timer; // Used to time content server acitivity
     private Boolean isContentServer = false; // if a client sends PUT request, the value will be set to true.
+    private Boolean isFirstEntry = true; // the first successful update should recieve respond code status 201 - HTTP_CREATED
 
     // Constructor
     public ClientHandler(Socket socket) {
@@ -123,7 +124,19 @@ public class ClientHandler implements Runnable {
                 // Update the weather using the new data
                 if (old_time < recieved_time) {
                     System.out.println("\n"+old_time + " < " + recieved_time+ " ==> update weather!\n");
-                    UpdateWeather(new_data);
+                    if (AggregationServer.UpdateWeather(this.sessionID, new_data)) {
+                        // send OK
+                        if (isFirstEntry) {
+                            SendMessage("HTTP/1.1 201 HTTP_CREATED\r\n","");
+                            isFirstEntry = false;
+                        } else {
+                            SendMessage("HTTP/1.1 200 OK\r\n","");
+                        }
+                    } else {
+                        // Incorrect JSON format
+                        SendMessage("HTTP/1.1 500 Internal Server Error\r\n","");
+                    }
+                        
                 } else {
                     System.out.println("\n"+old_time + " > " + recieved_time+ " ==> no no no updating");
                 }
@@ -195,28 +208,6 @@ public class ClientHandler implements Runnable {
         } catch (IOException e) {
             CloseConnection();
         }    
-    }
-
-    // This function lets the thread update the weather. "synchronized" keyword is used to protect race condition.
-    public synchronized void UpdateWeather(String new_data) {
-        // Convert the data entries to WeaterEntry objects
-        try {
-            WeatherEntry[] entries = Parser.JSON2Obj(new_data);
-
-            // update the data
-            for (WeatherEntry entry:entries) {
-                // Add the session ID to the entry as sourceID.
-                entry.addSourceID(this.sessionID);
-                // update in database
-                AggregationServer.database.put(entry.getStationID(), entry);
-            }
-
-            // send OK
-            SendMessage("HTTP/1.1 200 OK\r\n","");
-        } catch (Exception e) {
-            // Incorrect JSON format
-            SendMessage("HTTP/1.1 500 Internal Server Error\r\n","");
-        }   
     }
 
     public void SendMessage(String header, String body) {

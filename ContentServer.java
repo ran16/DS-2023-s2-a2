@@ -88,7 +88,7 @@ public class ContentServer {
         SyncTime();
         SendMessage(header,body);
 
-        System.out.println("Time = " + this.LamportClock+"\n\n");
+        System.out.println("Local Lamport time = " + this.LamportClock);
 
         // Recieve the response
         try {
@@ -169,6 +169,7 @@ public class ContentServer {
                 System.out.println("Sending weather update "+ number_of_updates +"...");
                 String response = cs.UpdateWeather();
                 int respons_code = cs.Parser.GetResponseCode(response);
+                System.out.println("response code = " + Integer.toString(respons_code) +"\n\n");
 
                 // If success, sleep for 10 seconds and update again. Otherwise update immediately.
                 if ( respons_code >= 200 && respons_code < 300) {

@@ -12,6 +12,7 @@ public class AggregationServer {
     private static HashMap<String, Set<String>> AliveContentServers = new HashMap<>(); // used to keep track of content servers and station IDs reported by each server
     public static int LamportClock = 0;
     public static int sessionID = 0; // Used to keep track of content servers.
+    private static Parser parser = new Parser();;
 
     // constructor
     public AggregationServer(ServerSocket serverSocket) {
@@ -35,6 +36,25 @@ public class AggregationServer {
         // Issue the session ID to client
         return sid;
     }
+
+    // This function lets the thread update the weather. "synchronized" keyword is used to protect race condition.
+    // It returns true on success
+    public synchronized static Boolean UpdateWeather(int sessionID, String new_data) {
+        try {
+            WeatherEntry[] entries = parser.JSON2Obj(new_data);
+            // update the data
+            for (WeatherEntry entry:entries) {
+                // Add the session ID to the entry as sourceID.
+                entry.addSourceID(sessionID);
+                // update in database
+                AggregationServer.database.put(entry.getStationID(), entry);
+            }
+            return true; // success
+        } catch (Exception e) {
+            return false; // failed due to invalid json format
+        }        
+    }
+
 
     // Remove all old entries that is logged by contentServerID if it becomes disconnected.
     public synchronized static void RemoveOldEntries(int contentServerID){
