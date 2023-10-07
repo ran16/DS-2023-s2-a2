@@ -15,6 +15,7 @@ public class ClientHandler implements Runnable {
     private Clock clock; // the Clock library
     private int sessionID; // to keep track of clients, especially content servers.
     private Timer timer; // Used to time content server acitivity
+    private Boolean isContentServer = false; // if a client sends PUT request, the value will be set to true.
 
     // Constructor
     public ClientHandler(Socket socket) {
@@ -41,6 +42,7 @@ public class ClientHandler implements Runnable {
     // This is the code that will be executed in a thread, where the handling logic is implemented.
     @Override
     public void run() {
+        System.out.println("Client " + Integer.toString(this.sessionID) + " is connected.\n");  
         // Listen for client requests
         while (this.client_soc.isConnected() && !this.client_soc.isClosed()) {
             try {
@@ -53,7 +55,6 @@ public class ClientHandler implements Runnable {
                 } else if (request != null && request.matches("PUT /weather.json .*")) {
                     ParsePUTRequest(request+"\n");
                 } else if (request != null && request.matches("GET /time .*")) {
-                    System.out.println("sync time... reqeust");
                     ParseGETTimeRequest(request+"\n");
                 } else {
                     SendMessage("HTTP/1.1 400 Bad Request\r\n","");
@@ -85,9 +86,9 @@ public class ClientHandler implements Runnable {
         public void run() {
             // Close the client connection due to inactivity
             try {
-                System.out.println("Closing connection to Content Server " + sessionID + " due to inactivity.");
                 if (clientSocket != null) {
                     clientSocket.close();
+                    System.out.println("Closing connection to Content Server " + sessionID + " due to inactivity.");
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -122,10 +123,10 @@ public class ClientHandler implements Runnable {
             } else {
                 // Update the weather using the new data
                 if (old_time < recieved_time) {
-                    System.out.println(old_time + " < " + recieved_time+ " ==> update weather!");
+                    System.out.println("\n"+old_time + " < " + recieved_time+ " ==> update weather!\n");
                     UpdateWeather(new_data);
                 } else {
-                    System.out.println(old_time + " > " + recieved_time+ " ==> no no no updating");
+                    System.out.println("\n"+old_time + " > " + recieved_time+ " ==> no no no updating");
                 }
             }          
         } catch (IOException e) {
@@ -143,7 +144,7 @@ public class ClientHandler implements Runnable {
                 line = bufferedReader.readLine();
             }
             request = request + line + "\n";
-            System.out.println("quack: --------------\n"+request+"------------");
+            System.out.println("Recieved request: --------------\n"+request+"------------\n");
 
             // Get timestamp from request
             int recieved_time = clock.GetRecievedTime(request);
@@ -182,7 +183,7 @@ public class ClientHandler implements Runnable {
                 line = bufferedReader.readLine();
             }
             request = request + line + "\n";
-            System.out.println("Incoming request: --------------\n"+request+"------------");
+            System.out.println("\nRecieved request: --------------\n"+request+"------------");
 
             // Get timestamp from request
             int recieved_time = clock.GetRecievedTime(request);
@@ -251,7 +252,7 @@ public class ClientHandler implements Runnable {
             }
             if (client_soc != null) {
                 client_soc.close();
-                System.out.println("Client is disconnected");
+                System.out.println("Client " + this.sessionID + " is disconnected.");
             }
         } catch (IOException e) {
             System.out.println("Failed to close connection");

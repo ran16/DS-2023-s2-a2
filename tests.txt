@@ -1,4 +1,4 @@
-1. Content server sends incorrect json file: get 500
+1. Content server sends incorrect json format: get 500
 2. Content server sends empty PUT request: get 204
 3. Messages received contain no valid lamport clock
 Aggregation server remove items if a content server has not communicated for 30 seconds
@@ -6,3 +6,5 @@ Aggregation server remove items if a content server has not communicated for 30 
 6. Automated testing: have content server serving weather file 1-5, 6-10, 11-15, etc. Each file is populated with random data.
 7. test Client:
     7.1 test found weather station, all weathers, can't find weather station
+8. Show all error codes
+9. show there is no race condition when the weather data is being updated

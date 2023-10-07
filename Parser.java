@@ -12,7 +12,7 @@ import com.google.gson.GsonBuilder;
 
 
 public class Parser {
-    private Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().setPrettyPrinting().create();
 
     // plain string ==> JSON string
     public String str2JSON(String str) {

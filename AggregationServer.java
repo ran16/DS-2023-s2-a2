@@ -67,8 +67,7 @@ public class AggregationServer {
             // Keep listening for connection requests
             while (!serverSocket.isClosed()) {
                 // Blocks till a connection request comes through
-                Socket client_soc = serverSocket.accept();
-                System.out.println("A client has connected.");          
+                Socket client_soc = serverSocket.accept();        
 
                 // Create a client handler to handler the client request
                 ClientHandler clientHandler = new ClientHandler(client_soc);
