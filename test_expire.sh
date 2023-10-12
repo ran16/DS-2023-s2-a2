@@ -27,7 +27,7 @@ echo "Terminating content server..."
 kill $pid_content_server
 
 echo "wait for 30 seconds"
-sleep 40
+sleep 30
 
 # Get weather again -- should be empty
 java -cp .:./gson-2.10.1.jar GETClient "http://127.0.0.1:4567" > Output_GetClient.txt

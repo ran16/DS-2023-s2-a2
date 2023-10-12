@@ -32,3 +32,5 @@ clean:
 	rm *.class
 	rm Output_*.txt
 	killall java
+	rm *backup.txt
+	echo  -e "0\n[]" > AggregationServer_backup.txt 
