@@ -36,8 +36,8 @@ public class AggregationServer {
     }
 
     // This function lets the thread update the weather. "synchronized" keyword is used to protect race condition.
-    // It returns true on success
-    public synchronized static Boolean UpdateWeather(int sessionID, String new_data) {
+    // It returns the size of updated items on success, and -1 if fail. 
+    public synchronized static int UpdateWeather(int sessionID, String new_data) {
         try {
             WeatherEntry[] entries = parser.JSON2Obj(new_data);
             // update the data
@@ -48,9 +48,9 @@ public class AggregationServer {
                 AggregationServer.database.put(entry.getStationID(), entry);
             }
             
-            return true; // success
+            return entries.length; // success
         } catch (Exception e) {
-            return false; // failed due to invalid json format
+            return -1; // failed due to invalid json format
         }        
     }
 

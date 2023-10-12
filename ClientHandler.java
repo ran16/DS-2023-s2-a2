@@ -119,36 +119,34 @@ public class ClientHandler implements Runnable {
 
             // Get the data in the body of the PUT request
             String new_data = Parser.extractBody(request);
-            System.out.println("quack!!!!\n"+new_data);
-
-            // Check for empty requests
-            if (new_data.isEmpty() || new_data.equals("[\n\n]")) {
-                SendMessage("HTTP/1.1 204 No Content\r\n", "");
-            } else {
-                // Update the weather using the new data
-                if (old_time < recieved_time) {
-                    System.out.println("\n (local time) "+old_time + " < (recieved time) " + recieved_time+ " ==> update weather!\n");
-                    if (AggregationServer.UpdateWeather(this.sessionID, new_data)) {
-                        // send OK
-                        if (isFirstEntry) {
-                            SendMessage("HTTP/1.1 201 HTTP_CREATED\r\n","");
-                            isFirstEntry = false;
-                        } else {
-                            SendMessage("HTTP/1.1 200 OK\r\n","");
-                        }
-
-                        // Update the backup file
-                        AggregationServer.UpdateBackupFile("AggregationServer_backup.txt");
+            
+            // Update database based on the clock
+            if (old_time < recieved_time) {
+                System.out.println("\n (local time) "+old_time + " < (recieved time) " + recieved_time+ " ==> update weather!\n");
+                int updateQuantity = AggregationServer.UpdateWeather(this.sessionID, new_data);
+                if (updateQuantity > 0) {
+                    // send OK
+                    if (isFirstEntry) {
+                        SendMessage("HTTP/1.1 201 HTTP_CREATED\r\n","");
+                        isFirstEntry = false;
                     } else {
-                        // Incorrect JSON format
-                        SendMessage("HTTP/1.1 500 Internal Server Error\r\n","");
+                        SendMessage("HTTP/1.1 200 OK\r\n","");
                     }
-                        
+
+                    // Update the backup file
+                    AggregationServer.UpdateBackupFile("AggregationServer_backup.txt");
+                } else if (updateQuantity < 0) {
+                    // Incorrect JSON format
+                    SendMessage("HTTP/1.1 500 Internal Server Error\r\n","");
                 } else {
-                    SendMessage("HTTP/1.1 200 OK\r\n","");
-                    System.out.println("\n (local time) "+old_time + " > (recieved time) " + recieved_time+ " ==> no no no updating");
+                    // Check for empty requests
+                    SendMessage("HTTP/1.1 204 No Content\r\n", "");
                 }
-            }          
+                    
+            } else {
+                SendMessage("HTTP/1.1 200 OK\r\n","");
+                System.out.println("\n (local time) "+old_time + " > (recieved time) " + recieved_time+ " ==> no no no updating");
+            }         
         } catch (IOException e) {
             CloseConnection();
         }    
