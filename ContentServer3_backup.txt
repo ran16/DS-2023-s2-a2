@@ -1,0 +1,9 @@
+PUT /weather.json HTTP/1.1
+User-Agent: ATOMClient/1/0c
+Content-Type: json
+Content-Length: 4
+Lamport Time: 7498
+
+[
+
+]

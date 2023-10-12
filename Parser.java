@@ -205,7 +205,6 @@ public class Parser {
                 insideBlock = false;
             }
         }
-
         return body;
     }
 

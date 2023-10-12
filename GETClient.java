@@ -108,7 +108,7 @@ public class GETClient {
         }
     }
 
-    public static void main(String args[]) throws IOException{
+    public static void main(String args[]) throws IOException, InterruptedException{
         if (args.length < 1) {
             System.out.println("Please provide valid url.");
             return;
@@ -126,41 +126,45 @@ public class GETClient {
             System.out.println("Please provide valid url.");
             return;
         }
+        while (true) {
 
-        // Connect
-        try{
-            Socket socket = new Socket(host, port);
-            GETClient client = new GETClient(socket);
-            System.out.println("Client is connected\n\n");
+            // Connect
+            try{
+                Socket socket = new Socket(host, port);
+                GETClient client = new GETClient(socket);
+                System.out.println("Client is connected\n\n");
 
-            // Get station ID if there is one
-            String stationID = "";
-            if (args.length > 1) {
-                stationID = "/"+args[1];
-            }
-
-            // Send GET request
-            String response = client.GetWeather(url.toString(), stationID);
-
-            // Update clock
-            Integer recieved_time = client.clock.GetRecievedTime(response);
-            client.LamportClock  = (recieved_time > client.LamportClock ) ? recieved_time : client.LamportClock ;
-
-            try {
-                int respons_code = client.Parser.GetResponseCode(response);
-                if (respons_code == 200) {
-                    System.out.println("\nWeather " + stationID + ":\n");
-                    client.PrintWeather(client.Parser.extractBody(response));
-                } else {
-                    System.out.println(response);
+                // Get station ID if there is one
+                String stationID = "";
+                if (args.length > 1) {
+                    stationID = "/"+args[1];
                 }
-            } catch (Exception e) {
-                System.out.println("Did not get valid response. Please try again.");
-                client.CloseConnection();
+
+                // Send GET request
+                String response = client.GetWeather(url.toString(), stationID);
+
+                // Update clock
+                Integer recieved_time = client.clock.GetRecievedTime(response);
+                client.LamportClock  = (recieved_time > client.LamportClock ) ? recieved_time : client.LamportClock ;
+
+                try {
+                    int respons_code = client.Parser.GetResponseCode(response);
+                    if (respons_code == 200) {
+                        System.out.println("\nWeather " + stationID + ":\n");
+                        client.PrintWeather(client.Parser.extractBody(response));
+                        client.CloseConnection();
+                        return;
+                    } else {
+                        System.out.println(response);
+                    }
+                } catch (Exception e) {
+                    System.out.println("Did not get valid response. Please try again.");
+                    client.CloseConnection();
+                }
+            } catch (IOException e) {
+                System.out.println("failed to connect to server. Please check the host and port");
+                Thread.sleep(3000);
             }
-        } catch (IOException e) {
-            System.out.println("failed to connect to server. Please check the host and port");
-            return;
         }
     }
 }

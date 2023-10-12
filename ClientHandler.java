@@ -110,8 +110,6 @@ public class ClientHandler implements Runnable {
             }
             request = request + line + "\n";
 
-            System.out.print("Quack \n" + request);
-
             // Get timestamp from request
             int recieved_time = clock.GetRecievedTime(request);
             // Make a copy of the old time
@@ -121,14 +119,15 @@ public class ClientHandler implements Runnable {
 
             // Get the data in the body of the PUT request
             String new_data = Parser.extractBody(request);
+            System.out.println("quack!!!!\n"+new_data);
 
             // Check for empty requests
-            if (new_data.isEmpty() || new_data.equals("[]")) {
+            if (new_data.isEmpty() || new_data.equals("[\n\n]")) {
                 SendMessage("HTTP/1.1 204 No Content\r\n", "");
             } else {
                 // Update the weather using the new data
                 if (old_time < recieved_time) {
-                    System.out.println("\n"+old_time + " < " + recieved_time+ " ==> update weather!\n");
+                    System.out.println("\n (local time) "+old_time + " < (recieved time) " + recieved_time+ " ==> update weather!\n");
                     if (AggregationServer.UpdateWeather(this.sessionID, new_data)) {
                         // send OK
                         if (isFirstEntry) {
@@ -147,7 +146,7 @@ public class ClientHandler implements Runnable {
                         
                 } else {
                     SendMessage("HTTP/1.1 200 OK\r\n","");
-                    System.out.println("\n"+old_time + " > " + recieved_time+ " ==> no no no updating");
+                    System.out.println("\n (local time) "+old_time + " > (recieved time) " + recieved_time+ " ==> no no no updating");
                 }
             }          
         } catch (IOException e) {
@@ -165,7 +164,6 @@ public class ClientHandler implements Runnable {
                 line = bufferedReader.readLine();
             }
             request = request + line + "\n";
-            System.out.println("Recieved request: --------------\n"+request+"------------\n");
 
             // Get timestamp from request
             int recieved_time = clock.GetRecievedTime(request);
@@ -232,7 +230,6 @@ public class ClientHandler implements Runnable {
         if (client_soc.isConnected()) {
             try {
                 this.bufferedWriter.write(header + body);
-                System.out.println("quack \n" + header + body);
                 this.bufferedWriter.newLine();
                 this.bufferedWriter.flush();
             } catch (IOException e){

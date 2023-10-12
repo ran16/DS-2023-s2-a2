@@ -69,7 +69,6 @@ public class ContentServer {
 
             // update clock
             int recieved_time = clock.GetRecievedTime(response);
-            System.out.println("Quack received time = " + Integer.toString(recieved_time));
             this.LamportClock  = (recieved_time > this.LamportClock ) ? recieved_time : this.LamportClock ;
             this.LamportClock++;
         } catch (Exception e) {
@@ -116,9 +115,6 @@ public class ContentServer {
 
     // This function resends a PUT request recovered from a file
     public String ReSendWeatherUpdate(String msg) {
-        // send a GET request to get weather data
-        System.out.println(msg);
-        
         if (this.my_soc.isConnected()) {
             try {
                 this.bufferedWriter.write(msg);
@@ -204,70 +200,69 @@ public class ContentServer {
             System.out.println("Please provide valid url.");
             return;
         }
-
-        // Connect
-        try{
-            Socket socket = new Socket(host, port);
-            ContentServer cs = new ContentServer(socket);
-            System.out.println("Content Server is connected");
-            
-            // Get file path to the weather
-            cs.FilePath = args[1];
-
-            // Resend PUT request from backup file, if there is one
-            try {
-                // Load data from backup file
-                cs.backup_path = args[2];
-                StringBuilder result = new StringBuilder();
         
-                try (BufferedReader reader = new BufferedReader(new FileReader(cs.backup_path)) ) {
-                    String line;
-                    while ((line = reader.readLine()) != null) {
-                        result.append(line).append(System.lineSeparator());
-                    }
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-                // resend old data
-                boolean resendingPUTrequest = true;
-                while (cs.my_soc.isConnected() && !cs.my_soc.isClosed() && resendingPUTrequest) {
-                    System.out.println("Resending PUT request...");
-                    String response = cs.ReSendWeatherUpdate(result.toString());
+        while (true) {
+            // Connect
+            try{
+                Socket socket = new Socket(host, port);
+                ContentServer cs = new ContentServer(socket);
+                System.out.println("Content Server is connected");
+                
+                // Get file path to the weather
+                cs.FilePath = args[1];
 
+                // Resend PUT request from backup file, if there is one
+                boolean resendingPUTrequest = true;
+                try {
+                    // Load data from backup file
+                    cs.backup_path = args[2];
+                    StringBuilder result = new StringBuilder();
+                    try (BufferedReader reader = new BufferedReader(new FileReader(cs.backup_path)) ) {
+                        String line;
+                        while ((line = reader.readLine()) != null) {
+                            result.append(line).append(System.lineSeparator());
+                        }
+                    } catch (IOException e) {
+                        resendingPUTrequest = false;
+                    }
+
+                    while (cs.my_soc.isConnected() && !cs.my_soc.isClosed() && resendingPUTrequest) {
+                        System.out.println("Resending PUT request...");
+                        String response = cs.ReSendWeatherUpdate(result.toString());
+
+                        int respons_code = cs.Parser.GetResponseCode(response);
+                        System.out.println("response code = " + Integer.toString(respons_code) +"\n\n");
+
+                        // If success, stop resending and move on to new updates
+                        if ( respons_code >= 200 && respons_code < 300) {
+                            resendingPUTrequest = false;
+                        } 
+                    } 
+                } catch (Exception e) {
+                    System.out.println("Couldn't load or find backup file for this content server.");
+                    cs.LamportClock = 0;
+                }
+                
+
+                // Send PUT request
+                int number_of_updates=0;
+                // if the socket has been connected, and the close method has not been called.
+                while (cs.my_soc.isConnected() && !cs.my_soc.isClosed()) {
+                    System.out.println("Sending weather update "+ number_of_updates +"...");
+                    String response = cs.SendWeatherUpdate();
                     int respons_code = cs.Parser.GetResponseCode(response);
                     System.out.println("response code = " + Integer.toString(respons_code) +"\n\n");
-                    System.out.println("Quack response = \n" + response +"\n\n");
 
-                    // If success, stop resending and move on to new updates
+                    // If success, sleep for 10 seconds and update again. Otherwise update immediately.
                     if ( respons_code >= 200 && respons_code < 300) {
-                        resendingPUTrequest = false;
+                        number_of_updates++;
+                        Thread.sleep(10000);
                     } 
-                } 
-            } catch (Exception e) {
-                System.out.println("Couldn't load or find backup file for this content server.");
-                cs.LamportClock = 0;
+                }
+            } catch (IOException e) {
+                System.out.println("failed to connect to server. Please check the host and port");
+                Thread.sleep(3000);
             }
-            
-
-            // Send PUT request
-            int number_of_updates=0;
-            // if the socket has been connected, and the close method has not been called.
-            while (cs.my_soc.isConnected() && !cs.my_soc.isClosed()) {
-                System.out.println("Sending weather update "+ number_of_updates +"...");
-                String response = cs.SendWeatherUpdate();
-                int respons_code = cs.Parser.GetResponseCode(response);
-                System.out.println("response code = " + Integer.toString(respons_code) +"\n\n");
-                System.out.println("Quack response = \n" + response +"\n\n");
-
-                // If success, sleep for 10 seconds and update again. Otherwise update immediately.
-                if ( respons_code >= 200 && respons_code < 300) {
-                    number_of_updates++;
-                    Thread.sleep(10000);
-                } 
-            }
-        } catch (IOException e) {
-            System.out.println("failed to connect to server. Please check the host and port");
-            return;
         }
     }
 }
