@@ -5,8 +5,7 @@ END := \033[0m
 all:
 	javac -cp .:./gson-2.10.1.jar *.java
 
-test:
-	java -cp .:./gson-2.10.1.jar TxtToJsonConverter
+
 
 start:
 	java -cp .:./gson-2.10.1.jar AggregationServer
@@ -31,3 +30,5 @@ content3:
 
 clean:
 	rm *.class
+	rm Output_*.txt
+	killall java

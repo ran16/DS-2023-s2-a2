@@ -13,3 +13,8 @@ Aggregation server remove items if a content server has not communicated for 30 
     b. client 1 get data
     c. server 1 disconnect. Wait for 30 seconds
     d. client 1 gets data again ==> should be empty.
+
+
+
+edge cases:
+1. client ask for a station that does not exist

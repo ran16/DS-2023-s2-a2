@@ -17,3 +17,13 @@ Race condition:
 
 Removing old entries:
 When a content server stop sending messages for over 30 seconds, a time will go off and call the RemoveOldEntries() function. The function takes the disconnected content server's session ID, and look for entries with the same session ID in the database, and remove them.
+
+Tests:
+1. Testing text sending works; client, Aggregation server and content server processes start up and communicate; PUT operation works for one content server; GET operation works for 4 clients
+    a) How to test:
+        * run <./test_PUT_and_GET.sh>
+    b) Expected result: weather data sent by the content server viewable on the terminal. Data should match weather1.txt
+2. Testing Aggregation server expunging expired data works (30s)
+    a) How to test:
+        * run <./test_expire.sh>
+    b) Expected result:

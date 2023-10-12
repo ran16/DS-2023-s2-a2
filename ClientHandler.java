@@ -31,7 +31,6 @@ public class ClientHandler implements Runnable {
             // Create a timer to close the connection after 30 seconds of inactivity
             setTimer(30000);
             
-
             // Turn the socket's byte stream into char stream, and wrap it in a buffer for both read and write.
             this.bufferedReader = new BufferedReader(new InputStreamReader(client_soc.getInputStream()));
             this.bufferedWriter = new BufferedWriter(new OutputStreamWriter(client_soc.getOutputStream()));
@@ -60,6 +59,8 @@ public class ClientHandler implements Runnable {
                     ParseGETTimeRequest(request+"\n");
                 } else if (request != null && !request.isEmpty()){
                     SendMessage("HTTP/1.1 400 Bad Request\r\n","");
+                } else if (request == null){
+                    CloseConnection();
                 }
 
                 // Reset the timer upon receiving a message
@@ -200,7 +201,6 @@ public class ClientHandler implements Runnable {
                 line = bufferedReader.readLine();
             }
             request = request + line + "\n";
-            System.out.println("\nRecieved request: --------------\n"+request+"------------");
 
             // Get timestamp from request
             int recieved_time = clock.GetRecievedTime(request);
