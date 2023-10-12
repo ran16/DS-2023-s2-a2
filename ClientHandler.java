@@ -58,7 +58,7 @@ public class ClientHandler implements Runnable {
                     ParsePUTRequest(request+"\n");
                 } else if (request != null && request.matches("GET /time .*")) {
                     ParseGETTimeRequest(request+"\n");
-                } else {
+                } else if (request != null && !request.isEmpty()){
                     SendMessage("HTTP/1.1 400 Bad Request\r\n","");
                 }
 
@@ -93,7 +93,7 @@ public class ClientHandler implements Runnable {
                     AggregationServer.RemoveOldEntries(sessionID);
                     
                     // Update the backup file
-                    AggregationServer.UpdateBackupFile("weather_backup.txt");
+                    AggregationServer.UpdateBackupFile("AggregationServer_backup.txt");
                 } 
             }
         }, milliseconds);
@@ -109,6 +109,8 @@ public class ClientHandler implements Runnable {
                 line = bufferedReader.readLine();
             }
             request = request + line + "\n";
+
+            System.out.print("Quack \n" + request);
 
             // Get timestamp from request
             int recieved_time = clock.GetRecievedTime(request);
@@ -137,13 +139,14 @@ public class ClientHandler implements Runnable {
                         }
 
                         // Update the backup file
-                        AggregationServer.UpdateBackupFile("weather_backup.txt");
+                        AggregationServer.UpdateBackupFile("AggregationServer_backup.txt");
                     } else {
                         // Incorrect JSON format
                         SendMessage("HTTP/1.1 500 Internal Server Error\r\n","");
                     }
                         
                 } else {
+                    SendMessage("HTTP/1.1 200 OK\r\n","");
                     System.out.println("\n"+old_time + " > " + recieved_time+ " ==> no no no updating");
                 }
             }          
@@ -229,6 +232,7 @@ public class ClientHandler implements Runnable {
         if (client_soc.isConnected()) {
             try {
                 this.bufferedWriter.write(header + body);
+                System.out.println("quack \n" + header + body);
                 this.bufferedWriter.newLine();
                 this.bufferedWriter.flush();
             } catch (IOException e){

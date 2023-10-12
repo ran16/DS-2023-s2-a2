@@ -21,10 +21,13 @@ client3:
 	java -cp .:./gson-2.10.1.jar GETClient "http://127.0.0.1:4567" IDS100
 
 content1:
-	java -cp .:./gson-2.10.1.jar ContentServer "http://127.0.0.1:4567" "./weather1.txt"
+	java -cp .:./gson-2.10.1.jar ContentServer "http://127.0.0.1:4567" "./weather1.txt" "ContentServer1_backup.txt"
 
 content2:
-	java -cp .:./gson-2.10.1.jar ContentServer "http://127.0.0.1:4567" "./weather2.txt"
+	java -cp .:./gson-2.10.1.jar ContentServer "http://127.0.0.1:4567" "./weather2.txt" "ContentServer2_backup.txt"
+
+content3:
+	java -cp .:./gson-2.10.1.jar ContentServer "http://127.0.0.1:4567" "./weather3.txt" "ContentServer3_backup.txt"
 
 clean:
 	rm *.class

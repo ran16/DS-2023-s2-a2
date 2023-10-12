@@ -107,7 +107,7 @@ public class AggregationServer {
         
         try {
             System.out.println("Loading database from backup file ...");
-            String[] backup = parser.readBackupFile("weather_backup.txt");
+            String[] backup = parser.readBackupFile("AggregationServer_backup.txt");
             // Load lamport clock from backup file
             LamportClock = Integer.valueOf(backup[0]);
             

@@ -1,5 +1,7 @@
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
@@ -15,13 +17,13 @@ public class ContentServer {
     private String FilePath;
     private int LamportClock;
     private Clock clock; // the Clock library
+    private String backup_path;
 
     // This function creates a client object
     public ContentServer(Socket socket) {
         try {
             this.my_soc = socket;
             this.Parser = new Parser();
-            this.LamportClock = 0;
             this.clock = new Clock();
 
             // Turn the socket's byte stream into char stream, and wrap it in a buffer for both read and write.
@@ -67,6 +69,7 @@ public class ContentServer {
 
             // update clock
             int recieved_time = clock.GetRecievedTime(response);
+            System.out.println("Quack received time = " + Integer.toString(recieved_time));
             this.LamportClock  = (recieved_time > this.LamportClock ) ? recieved_time : this.LamportClock ;
             this.LamportClock++;
         } catch (Exception e) {
@@ -84,11 +87,48 @@ public class ContentServer {
             "Content-Type: json\r\n" +
             "Content-Length: " + body.getBytes().length + "\r\n";
         
-            // Sync time with the Aggregation server before sending weather update.
+        // Sync time with the Aggregation server before sending weather update.
         SyncTime();
         SendMessage(header,body);
-
         System.out.println("Local Lamport time = " + this.LamportClock);
+
+        // Recieve the response
+        try {
+            String response = "";
+            String line = this.bufferedReader.readLine();
+
+            while (line != null && !line.isEmpty()) {
+                response = response + line + "\n";
+                line = bufferedReader.readLine();
+            }
+
+            // update clock
+            int recieved_time = clock.GetRecievedTime(response);
+            this.LamportClock  = (recieved_time > this.LamportClock ) ? recieved_time : this.LamportClock ;
+            this.LamportClock++;
+
+            return response;
+        } catch (Exception e) {
+            this.CloseConnection();
+            return "";
+        }
+    }
+
+    // This function resends a PUT request recovered from a file
+    public String ReSendWeatherUpdate(String msg) {
+        // send a GET request to get weather data
+        System.out.println(msg);
+        
+        if (this.my_soc.isConnected()) {
+            try {
+                this.bufferedWriter.write(msg);
+                this.bufferedWriter.newLine();
+                this.bufferedWriter.flush();
+            }  catch (Exception e) {
+                System.out.println("Something went wrong. The server has disconnected.");
+                CloseConnection();
+            }
+        }
 
         // Recieve the response
         try {
@@ -122,6 +162,15 @@ public class ContentServer {
             body = "\r\n" + body;
         }
 
+        // Write message to backup
+        try (FileOutputStream fos = new FileOutputStream(this.backup_path)) {
+            String data = header + body+"\n"; 
+            byte[] bytes = data.getBytes();
+            fos.write(bytes);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         if (this.my_soc.isConnected()) {
             try {
                 this.bufferedWriter.write(header + body);
@@ -129,12 +178,15 @@ public class ContentServer {
                 this.bufferedWriter.flush();
             }  catch (Exception e) {
                 System.out.println("Something went wrong. The server has disconnected.");
-                this.CloseConnection();
+                CloseConnection();
             }
         }
     }
 
     public static void main(String args[]) throws IOException, InterruptedException{
+        System.out.println("Content server starting...\n");
+        
+        // Read url from commandline
         if (args.length < 1) {
             System.out.println("Please provide valid url.");
             return;
@@ -162,6 +214,41 @@ public class ContentServer {
             // Get file path to the weather
             cs.FilePath = args[1];
 
+            // Resend PUT request from backup file, if there is one
+            try {
+                // Load data from backup file
+                cs.backup_path = args[2];
+                StringBuilder result = new StringBuilder();
+        
+                try (BufferedReader reader = new BufferedReader(new FileReader(cs.backup_path)) ) {
+                    String line;
+                    while ((line = reader.readLine()) != null) {
+                        result.append(line).append(System.lineSeparator());
+                    }
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                // resend old data
+                boolean resendingPUTrequest = true;
+                while (cs.my_soc.isConnected() && !cs.my_soc.isClosed() && resendingPUTrequest) {
+                    System.out.println("Resending PUT request...");
+                    String response = cs.ReSendWeatherUpdate(result.toString());
+
+                    int respons_code = cs.Parser.GetResponseCode(response);
+                    System.out.println("response code = " + Integer.toString(respons_code) +"\n\n");
+                    System.out.println("Quack response = \n" + response +"\n\n");
+
+                    // If success, stop resending and move on to new updates
+                    if ( respons_code >= 200 && respons_code < 300) {
+                        resendingPUTrequest = false;
+                    } 
+                } 
+            } catch (Exception e) {
+                System.out.println("Couldn't load or find backup file for this content server.");
+                cs.LamportClock = 0;
+            }
+            
+
             // Send PUT request
             int number_of_updates=0;
             // if the socket has been connected, and the close method has not been called.
@@ -170,6 +257,7 @@ public class ContentServer {
                 String response = cs.SendWeatherUpdate();
                 int respons_code = cs.Parser.GetResponseCode(response);
                 System.out.println("response code = " + Integer.toString(respons_code) +"\n\n");
+                System.out.println("Quack response = \n" + response +"\n\n");
 
                 // If success, sleep for 10 seconds and update again. Otherwise update immediately.
                 if ( respons_code >= 200 && respons_code < 300) {

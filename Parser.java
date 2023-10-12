@@ -178,7 +178,7 @@ public class Parser {
             String[] parts = response.split(" ");
             return Integer.parseInt(parts[1]);
         } catch (Exception e) {
-            return 400;
+            return 500;
         }
     }
 
@@ -266,6 +266,7 @@ public class Parser {
 
         // Write the lamport clock to backup file.
         String data = Integer.toString(LamportClock) + "\r\n";
+        
         
         // Convert the list of weather data to JSON
         try {
