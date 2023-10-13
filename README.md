@@ -3,6 +3,7 @@
 # General commands:
 start server: <make start>
 start client: <make client1> or <make client2> or <make client3>
+run all tests: <make tests>
 
 
 # Lamport Clock:
@@ -21,9 +22,11 @@ start client: <make client1> or <make client2> or <make client3>
 When a content server stop sending messages for over 30 seconds, a time will go off and call the RemoveOldEntries() function. The function takes the disconnected content server's session ID, and look for entries with the same session ID in the database, and remove them.
 
 # Fault Tolerance:
-Both Content servers and Aggregation Servers are fault tolerant. They write weather data to a backup file on each data update, and they load the backup file when starting or restarting.
+Both Content servers and Aggregation Servers are fault tolerant. They write weather data to a backup file on each data update, and they load the backup file when starting or restarting. The backup file include all the weather data and old lampot clock.
+Both Content server and Get Client will retry sending requests if they couldn't connect to server or recienve error code 500.
 
 # Tests:
+(To run all the tests below, run <make tests>)
 1. Testing GetClient requests for a valid station ID
         *run <./test_GET_stationID.sh>
 2. Testing GetClient requests for ALL weather stations
