@@ -122,7 +122,7 @@ public class ClientHandler implements Runnable {
             String new_data = Parser.extractBody(request);
             
             // Update database based on the clock
-            if (old_time < recieved_time) {
+            if (old_time <= recieved_time) {
                 System.out.println("\n (local time) "+old_time + " < (recieved time) " + recieved_time+ " ==> update weather!\n");
                 int updateQuantity = AggregationServer.UpdateWeather(this.sessionID, new_data);
                 if (updateQuantity > 0) {

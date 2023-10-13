@@ -22,6 +22,7 @@ if cmp -s "$file1" "$file2"; then
     echo -e "\e[32mPassed test: code 400 Bad Request \e[0m"
 else
     echo -e "\e[31mFailed test: code 400 Bad Request  \e[0m"
+    diff ./test_400.txt ./output.txt
 fi
 
 
