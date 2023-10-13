@@ -4,34 +4,28 @@
 make clean
 make
 
+
+# Start content server *before* the Aggregation server
+java -cp .:./gson-2.10.1.jar ContentServer "http://127.0.0.1:4567" "./weather1.txt" "ContentServer1_backup.txt"  > Output_ContentServer.txt &
+sleep 5
+
 # start server
-echo "starting agregation server..."
 java -cp .:./gson-2.10.1.jar AggregationServer > Output_AggregationServer.txt &
-pid_agg_server=$!
 sleep 2
 
+# Read data
+curl -X GET "http://127.0.0.1:4567/weather" > ./output.txt
 
-# Start content server
-echo "Content server sending data from weather1.txt ..."
-java -cp .:./gson-2.10.1.jar ContentServer "http://127.0.0.1:4567" "./weather1.txt" "ContentServer1_backup.txt" > Output_ContentServer.txt &
-sleep 3
-cat Output_ContentServer.txt
+# Compare
+file1="./test_retry_on_error.txt"
+file2="./output.txt"
 
-
-
-# Terminate Aggregation Server
-echo "Terminating Aggregation server..."
-kill -kill $pid_agg_server
-sleep 12
-
-
-# Restart server
-echo "Restarting agregation server..."
-java -cp .:./gson-2.10.1.jar AggregationServer > Output_AggregationServer.txt &
-sleep 3
-
-echo "Now Content server has reconnected with aggregation server"
-cat Output_ContentServer.txt
+# Compare the two files using the `cmp` command
+if cmp -s "$file1" "$file2"; then
+    echo -e "\e[32mPassed test: Content server retry on error\e[0m"
+else
+    echo -e "\e[31mFailed test: Content server retry on error \e[0m"
+fi
 
 
 # End testing

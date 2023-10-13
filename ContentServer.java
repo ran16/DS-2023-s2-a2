@@ -257,7 +257,14 @@ public class ContentServer {
                     if ( respons_code >= 200 && respons_code < 300) {
                         number_of_updates++;
                         Thread.sleep(10000);
-                    } 
+
+                        // For testing purpose only
+                        if (args.length > 3) {
+                            if (number_of_updates > Integer.parseInt(args[3]) -1 ) {
+                                return; // End program
+                            }
+                        }
+                    }
                 }
             } catch (IOException e) {
                 System.out.println("failed to connect to server. Please check the host and port");

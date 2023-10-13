@@ -11,6 +11,7 @@ start client: <make client1> or <make client2> or <make client3>
     * Sending a message
 2. When recieving a message, the reciever will compare its local clock with the recieved clock. If the recived clock is greater, then let local clock = recieved clock, otherwise no change. Then increase local clock by 1.
 3. When sending a message, increase local clock by 1.
+4. Content servers sync their lamport clock with the Aggregation server with GET time request, before it sends every weather update.
 
 
 # Race condition:
@@ -23,38 +24,33 @@ When a content server stop sending messages for over 30 seconds, a time will go 
 Both Content servers and Aggregation Servers are fault tolerant. They write weather data to a backup file on each data update, and they load the backup file when starting or restarting.
 
 # Tests:
-1. Testing text sending works; client, Aggregation server and content server processes start up and communicate; PUT operation works for one content server; GET operation works for 4 clients
-    a) How to test:
-        * run <test_PUT_and_GET.sh>
-    b) Expected result: weather data sent by the content server viewable on the terminal. Data should match weather1.txt
-2. Testing Aggregation server expunging expired data works (30s)
-    a) How to test:
-        * run <test_expire.sh>
-    b) Expected result: before 30s expire, GetClient can view weather data sent by Content server (weather1.txt). After 30s expires, GetClient cannot view weather data sent by Content server (weather1.txt).
-3. Testing retry on errors
-    a) How to test:
-        * run <test_retry_on_error.sh>
-    b) Expected result: After aggregation gets killed, ContentServer keeps printing "failed to connect to server. Please check the host and port", and resend messages after aggregation server restarts.
-4. Testing Lamport clocks
-    a) Host to test:
-        * run <test_lamport.sh>
-    b) Expected result: Aggregation server prints updating weather message only if local time is less than the content server time.
-5. Testing all error codes are implemented
-    a) How to test:
-        * run <test_200_201.sh>
-        * run <test_204.sh>
-        * run <test_400.sh>
-        * run <test_500.sh>
-6. Testing aggregation servers are replicated and fault tolerant
-    a) How to test:
-        *run <test_AG_FT.sh>
-    b) Expected result: After killing the AG server and restarting, the weather data still persists.
-7. Testing aggregation servers are replicated and fault tolerant
-    a) How to test:
-        *run <test_AG_FT.sh>
-    b) Expected result: After killing the AG server and restarting, the weather data still persists.
-8. Testing content servers are replicated and fault tolerant
-    a) How to test:
-        *run <test_CS_FT.sh>
-    b) Expected result: After killing the CS server and restarting, the CS server will read the last PUT request from the backup server, and resend that request: "Resending PUT request...response code = 200"
+1. Testing GetClient requests for a valid station ID
+        *run <./test_GET_stationID.sh>
+2. Testing GetClient requests for ALL weather stations
+        *run <./test_GET_all_stations.sh>
+3. Testing special case: GetClient requests for an invalid station ID.
+        *run <./test_GET_invalid_stationID.sh>
+4. Testing text sending works; client, Aggregation server and content server processes start up and communicate; PUT operation works for one content server 
+        *run <./test_PUT_and_GET.sh>
+5. Testing 4 GET Clients
+        *run <./test_4GETClients.sh>
+6. Testing Aggregation server expunging expired data works (30s)
+        * run <./test_expire.sh>
+7. Testing Content Server retry on errors
+        * run <./test_retry_on_error.sh>
+8. Testing Lamport clocks
+        * run <./test_lamport.sh>
+9. Testing 3 Content Servers, and updating depends on the lamport clock when sending
+        *run <./test_3ContentServers.sh>
+10. Testing all error codes are implemented
+        * run <./test_200_201.sh>
+        * run <./test_204.sh>
+        * run <./test_400.sh>
+        * run <./test_500.sh>       
+11. Testing aggregation servers are replicated and fault tolerant: after restarting, the weather data still persists.
+        *run <./test_AG_FT.sh>
+12. Testing content servers are replicated and fault tolerant: resend PUT request after crashing and restarting
+        *run <./test_CS_FT.sh>
+
+
 

@@ -1,0 +1,4510 @@
+Content server starting...
+
+Content Server is connected
+Sending weather update 0...
+Local Lamport time = 5
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 13
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 21
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 29
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 37
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 45
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 53
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 61
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 69
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 77
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 85
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 93
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 101
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 109
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 117
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 125
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 133
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 141
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 149
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 157
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 165
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 173
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 181
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 189
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 197
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 205
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 213
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 221
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 229
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 237
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 245
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 253
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 261
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 269
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 277
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 285
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 293
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 301
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 309
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 317
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 325
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 333
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 341
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 349
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 357
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 365
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 373
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 381
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 389
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 397
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 405
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 413
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 421
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 429
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 437
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 445
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 453
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 461
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 469
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 477
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 485
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 493
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 501
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 509
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 517
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 525
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 533
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 541
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 549
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 557
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 565
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 573
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 581
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 589
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 597
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 605
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 613
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 621
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 629
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 637
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 645
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 653
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 661
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 669
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 677
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 685
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 693
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 701
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 709
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 717
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 725
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 733
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 741
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 749
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 757
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 765
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 773
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 781
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 789
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 797
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 805
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 813
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 821
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 829
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 837
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 845
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 853
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 861
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 869
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 877
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 885
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 893
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 901
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 909
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 917
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 925
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 933
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 941
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 949
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 957
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 965
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 973
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 981
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 989
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 997
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1005
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1013
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1021
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1029
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1037
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1045
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1053
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1061
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1069
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1077
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1085
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1093
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1101
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1109
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1117
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1125
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1133
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1141
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1149
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1157
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1165
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1173
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1181
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1189
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1197
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1205
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1213
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1221
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1229
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1237
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1245
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1253
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1261
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1269
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1277
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1285
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1293
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1301
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1309
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1317
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1325
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1333
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1341
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1349
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1357
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1365
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1373
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1381
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1389
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1397
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1405
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1413
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1421
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1429
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1437
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1445
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1453
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1461
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1469
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1477
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1485
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1493
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1501
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1509
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1517
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1525
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1533
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1541
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1549
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1557
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1565
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1573
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1581
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1589
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1597
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1605
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1613
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1621
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1629
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1637
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1645
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1653
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1661
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1669
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1677
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1685
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1693
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1701
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1709
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1717
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1725
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1733
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1741
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1749
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1757
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1765
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1773
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1781
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1789
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1797
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1805
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1813
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1821
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1829
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1837
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1845
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1853
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1861
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1869
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1877
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1885
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1893
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1901
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1909
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1917
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1925
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1933
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1941
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1949
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1957
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1965
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1973
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1981
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1989
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 1997
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2005
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2013
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2021
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2029
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2037
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2045
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2053
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2061
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2069
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2077
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2085
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2093
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2101
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2109
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2117
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2125
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2133
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2141
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2149
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2157
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2165
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2173
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2181
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2189
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2197
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2205
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2213
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2221
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2229
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2237
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2245
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2253
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2261
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2269
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2277
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2285
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2293
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2301
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2309
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2317
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2325
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2333
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2341
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2349
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2357
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2365
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2373
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2381
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2389
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2397
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2405
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2413
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2421
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2429
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2437
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2445
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2453
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2461
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2469
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2477
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2485
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2493
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2501
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2509
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2517
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2525
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2533
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2541
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2549
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2557
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2565
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2573
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2581
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2589
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2597
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2605
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2613
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2621
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2629
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2637
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2645
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2653
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2661
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2669
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2677
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2685
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2693
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2701
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2709
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2717
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2725
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2733
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2741
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2749
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2757
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2765
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2773
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2781
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2789
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2797
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2805
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2813
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2821
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2829
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2837
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2845
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2853
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2861
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2869
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2877
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2885
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2893
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2901
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2909
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2917
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2925
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2933
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2941
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2949
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2957
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2965
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2973
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2981
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2989
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 2997
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3005
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3013
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3021
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3029
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3037
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3045
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3053
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3061
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3069
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3077
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3085
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3093
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3101
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3109
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3117
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3125
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3133
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3141
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3149
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3157
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3165
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3173
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3181
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3189
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3197
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3205
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3213
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3221
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3229
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3237
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3245
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3253
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3261
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3269
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3277
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3285
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3293
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3301
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3309
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3317
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3325
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3333
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3341
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3349
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3357
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3365
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3373
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3381
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3389
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3397
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3405
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3413
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3421
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3429
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3437
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3445
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3453
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3461
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3469
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3477
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3485
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3493
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3501
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3509
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3517
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3525
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3533
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3541
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3549
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3557
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3565
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3573
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3581
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3589
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3597
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3605
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3613
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3621
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3629
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3637
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3645
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3653
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3661
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3669
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3677
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3685
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3693
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3701
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3709
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3717
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3725
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3733
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3741
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3749
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3757
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3765
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3773
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3781
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3789
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3797
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3805
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3813
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3821
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3829
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3837
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3845
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3853
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3861
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3869
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3877
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3885
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3893
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3901
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3909
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3917
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3925
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3933
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3941
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3949
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3957
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3965
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3973
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3981
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3989
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 3997
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4005
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4013
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4021
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4029
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4037
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4045
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4053
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4061
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4069
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4077
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4085
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4093
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4101
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4109
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4117
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4125
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4133
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4141
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4149
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4157
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4165
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4173
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4181
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4189
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4197
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4205
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4213
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4221
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4229
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4237
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4245
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4253
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4261
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4269
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4277
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4285
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4293
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4301
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4309
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4317
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4325
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4333
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4341
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4349
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4357
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4365
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4373
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4381
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4389
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4397
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4405
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4413
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4421
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4429
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4437
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4445
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4453
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4461
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4469
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4477
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4485
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4493
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4501
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4509
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4517
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4525
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4533
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4541
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4549
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4557
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4565
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4573
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4581
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4589
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4597
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4605
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4613
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4621
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4629
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4637
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4645
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4653
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4661
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4669
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4677
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4685
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4693
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4701
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4709
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4717
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4725
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4733
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4741
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4749
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4757
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4765
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4773
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4781
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4789
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4797
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4805
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4813
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4821
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4829
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4837
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4845
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4853
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4861
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4869
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4877
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4885
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4893
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4901
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4909
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4917
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4925
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4933
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4941
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4949
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4957
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4965
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4973
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4981
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4989
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 4997
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5005
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5013
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5021
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5029
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5037
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5045
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5053
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5061
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5069
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5077
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5085
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5093
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5101
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5109
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5117
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5125
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5133
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5141
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5149
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5157
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5165
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5173
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5181
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5189
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5197
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5205
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5213
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5221
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5229
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5237
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5245
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5253
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5261
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5269
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5277
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5285
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5293
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5301
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5309
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5317
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5325
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5333
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5341
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5349
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5357
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5365
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5373
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5381
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5389
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5397
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5405
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5413
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5421
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5429
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5437
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5445
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5453
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5461
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5469
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5477
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5485
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5493
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5501
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5509
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5517
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5525
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5533
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5541
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5549
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5557
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5565
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5573
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5581
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5589
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5597
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5605
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5613
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5621
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5629
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5637
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5645
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5653
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5661
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5669
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5677
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5685
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5693
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5701
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5709
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5717
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5725
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5733
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5741
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5749
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5757
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5765
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5773
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5781
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5789
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5797
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5805
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5813
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5821
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5829
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5837
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5845
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5853
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5861
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5869
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5877
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5885
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5893
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5901
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5909
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5917
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5925
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5933
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5941
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5949
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5957
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5965
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5973
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5981
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5989
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 5997
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6005
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6013
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6021
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6029
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6037
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6045
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6053
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6061
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6069
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6077
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6085
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6093
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6101
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6109
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6117
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6125
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6133
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6141
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6149
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6157
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6165
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6173
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6181
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6189
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6197
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6205
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6213
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6221
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6229
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6237
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6245
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6253
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6261
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6269
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6277
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6285
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6293
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6301
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6309
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6317
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6325
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6333
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6341
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6349
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6357
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6365
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6373
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6381
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6389
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6397
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6405
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6413
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6421
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6429
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6437
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6445
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6453
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6461
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6469
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6477
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6485
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6493
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6501
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6509
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6517
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6525
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6533
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6541
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6549
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6557
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6565
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6573
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6581
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6589
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6597
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6605
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6613
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6621
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6629
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6637
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6645
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6653
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6661
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6669
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6677
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6685
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6693
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6701
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6709
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6717
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6725
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6733
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6741
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6749
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6757
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6765
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6773
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6781
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6789
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6797
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6805
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6813
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6821
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6829
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6837
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6845
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6853
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6861
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6869
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6877
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6885
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6893
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6901
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6909
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6917
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6925
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6933
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6941
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6949
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6957
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6965
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6973
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6981
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6989
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 6997
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 7005
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 7013
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 7021
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 7029
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 7037
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 7045
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 7053
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 7061
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 7069
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 7077
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 7085
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 7093
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 7101
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 7109
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 7117
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 7125
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 7133
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 7141
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 7149
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 7157
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 7165
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 7173
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 7181
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 7189
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 7197
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 7205
+response code = 500
+
+
+Sending weather update 0...
+Local Lamport time = 7213

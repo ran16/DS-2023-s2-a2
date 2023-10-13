@@ -1,0 +1,8 @@
+Content server starting...
+
+Content Server is connected
+Sending weather update 0...
+Local Lamport time = 5
+response code = 204
+
+

@@ -1,12 +1,8 @@
 Content server starting...
 
 Content Server is connected
-Resending PUT request...
-response code = 200
-
-
 Sending weather update 0...
-Local Lamport time = 15
+Local Lamport time = 1004
 response code = 201
 
 

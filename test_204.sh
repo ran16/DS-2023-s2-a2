@@ -10,18 +10,20 @@ java -cp .:./gson-2.10.1.jar AggregationServer > Output_AggregationServer.txt &
 sleep 2
 
 
-# Start content server 1
-echo "[Waiting for Content server to send data from weather3.txt, where weather3.txt is empty ...]"
-java -cp .:./gson-2.10.1.jar ContentServer "http://127.0.0.1:4567" "./weather3.txt" "ContentServer1_backup.txt" > Output_ContentServer3.txt &
+# Start content server 
+java -cp .:./gson-2.10.1.jar ContentServer "http://127.0.0.1:4567" "./weather3.txt" "ContentServer1_backup.txt" 1 > output.txt &
 sleep 3
 
-# Start content server 2
-echo "[For empty entry, Content server recieved code 204:]"
-cat Output_ContentServer3.txt
+# Compare
+file1="./test_204.txt"
+file2="./output.txt"
 
-
-
-
+# Compare the two files using the `cmp` command
+if cmp -s "$file1" "$file2"; then
+    echo -e "\e[32mPassed test: code 204 for empty content\e[0m"
+else
+    echo -e "\e[31mFailed test: code 204 for empty content \e[0m"
+fi
 
 
 

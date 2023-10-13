@@ -5,21 +5,24 @@ make clean
 make
 
 # start server
-echo "[starting agregation server...]"
 java -cp .:./gson-2.10.1.jar AggregationServer > Output_AggregationServer.txt &
 sleep 2
 
-
-# Start content server 1
-echo "[Waiting for Content server to send data from weather1.txt ...]"
-java -cp .:./gson-2.10.1.jar ContentServer "http://127.0.0.1:4567" "./weather1.txt" "ContentServer1_backup.txt" > Output_ContentServer1.txt &
+# Start content server
+java -cp .:./gson-2.10.1.jar ContentServer "http://127.0.0.1:4567" "./weather1.txt" "ContentServer1_backup.txt" 2 > output.txt &
 sleep 20
 
-# Start content server 2
-echo "[Resent PUT request from backup files recive code 200.]"
-echo "[For the first entry, Content server recieved code 201.]" 
-echo "[The following entries Content server recieved code 200.]"
-cat Output_ContentServer1.txt
+# Compare
+file1="./test_200_201.txt"
+file2="./output.txt"
+
+# Compare the two files using the `cmp` command
+if cmp -s "$file1" "$file2"; then
+    echo -e "\e[32mPassed test: code 200 and 201 \e[0m"
+else
+    echo -e "\e[31mFailed test: code 200 and 201 \e[0m"
+fi
+
 
 
 
