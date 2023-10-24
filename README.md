@@ -5,6 +5,18 @@ start server:
 ```
 make start
 ```
+start content server:
+```
+make content1
+```
+or
+```
+make content2
+```
+or
+```
+make content3
+```
 start client: 
 ```
 make client1
