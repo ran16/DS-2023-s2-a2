@@ -5,8 +5,15 @@ start server:
 ```
 make start
 ```
-start client: <make client1> or <make client2> or <make client3>
-run all tests: <make tests>
+start client: 
+```
+make client1
+or
+```make client2```
+or <
+```make client3```
+run all tests: 
+```make tests```
 
 
 # Lamport Clock:
