@@ -9,11 +9,17 @@ start client:
 ```
 make client1
 or
-```make client2```
-or <
-```make client3```
+```
+make client2
+```
+or 
+```
+make client3
+```
 run all tests: 
-```make tests```
+```
+make tests
+```
 
 
 # Lamport Clock:
