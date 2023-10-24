@@ -55,7 +55,11 @@ Both Content servers and Aggregation Servers are fault tolerant. They write weat
 Both Content server and Get Client will retry sending requests if they couldn't connect to server or recienve error code 500.
 
 # Tests:
-(To run all the tests below, run <make tests>. Note some of the tests can take up to 40 sec to run, please don't think they are hanging.)
+To run all the tests below, run 
+```
+make tests
+```
+Note some of the tests can take up to 40 sec to run, please don't think they are hanging.
 1. Testing GetClient requests for a valid station ID
         *run <./test_GET_stationID.sh>
 2. Testing GetClient requests for ALL weather stations
