@@ -1,7 +1,10 @@
 # DS-2023-s2-a2
 
 # General commands:
-start server: <make start>
+start server: 
+```
+make start
+```
 start client: <make client1> or <make client2> or <make client3>
 run all tests: <make tests>
 
